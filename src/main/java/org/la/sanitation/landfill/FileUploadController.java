@@ -4,6 +4,9 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import javax.annotation.Resource;
+
+import org.la.sanitation.landfill.service.InstantaneousProcessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileUploadController {
 	
 	private static String VALID_EXT = "json";
+	
+	@Resource
+	private InstantaneousProcessor instantaneousProcessor;
 
     @RequestMapping(value="/upload", method=RequestMethod.POST)
     public @ResponseBody String handleFileUpload( @RequestParam("file") MultipartFile file){
@@ -35,9 +41,7 @@ public class FileUploadController {
                 if(!extension.equalsIgnoreCase(VALID_EXT))
                 	return "Invalid file extension. Please upload a Json file";
                 
-                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filename)));
-                stream.write(bytes);
-                stream.close();
+                instantaneousProcessor.process(bytes);
                 
                 return "You successfully uploaded " + filename + "!";
                 
