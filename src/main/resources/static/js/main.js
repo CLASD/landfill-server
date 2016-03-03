@@ -1,4 +1,4 @@
-angular.module('landfill', ['ngRoute'])
+angular.module('main', ['ngRoute'])
 	.config(['$routeProvider',
 		function($routeProvider) { 
 			$routeProvider
