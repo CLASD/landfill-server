@@ -1,37 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Landfill Data Manager</title>
-    <!-- <link href="css/angular-bootstrap.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
-    <script src="js/angular-bootstrap.js" type="text/javascript"></script>
-    <script src="js/main.js"></script>
-    <style type="text/css">
-      [ng\:cloak], [ng-cloak], .ng-cloak {
-        display: none !important;
-      }
-    </style>
-  </head>
-  <body ng-app="landfill">
-    <div class="container">
-      <h1>Landfill Data Manager</h1>
+<head>
+<title>Landfill Data Manager</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
+<style type="text/css">
+[ng\:cloak], [ng-cloak], .ng-cloak {
+	display: none !important;
+}
+</style>
+</head>
+<body ng-app="landfill">
+	<div class="container">
+		<nav class="navbar navbar-inverse navbar-static-top">
+			<div class="navbar-header">
+				<h4 class="navbar-brand" href="#">
+					Landfill Data Manager</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="/">Upload</a></li>
+				<li><a ng-href="/history">Data Viewer</a></li>
+			</ul>
+		</nav>
 
-      <hr>
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
 
-      <!-- <div ng-controller="home" ng-cloak class="ng-cloak">
+				<p>Upload Landfill Data to SQL Server Express!</p>
+
+				<label>Step 1: Choose a valid JSON File.</label><br />
+				<form method="POST" enctype="multipart/form-data" action="/upload">
+					<input type="file" name="file"><br /> <label>Step
+						2: Click the button below to upload.</label><br /> <input type="submit"
+						value="Upload">
+				</form>
+			</div>
+		</div>
+
+
+		<!-- <div ng-controller="home" ng-cloak class="ng-cloak">
         <p>The ID is {{greeting.id}}</p>
         <p>The content is {{greeting.content}}</p>
       </div> -->
 
-      <p>Upload Landfill Data to SQL Server Express!</p>
-
-      <label>Step 1: Choose a valid JSON File.</label><br />
-      <form method="POST" enctype="multipart/form-data" action="/upload">
-      	<input type="file" name="file"><br />
-        <label>Step 2: Click the button below to upload.</label><br />
-      	<input type="submit" value="Upload">
-      </form>
-    </div>
-  </body>
+	</div>
+</body>
 </html>
