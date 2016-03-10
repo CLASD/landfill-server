@@ -8,36 +8,38 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema landfill-data
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema landfill-data
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `landfill-data` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `landfill-data` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Employee`
+-- Table `landfill-data`.`Employee`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Employee` ;
+DROP TABLE IF EXISTS `landfill-data`.`Employee` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Employee` (
+CREATE TABLE IF NOT EXISTS `landfill-data`.`Employee` (
   `EmployeePK` INT NOT NULL COMMENT '',
   `Lastname` VARCHAR(45) NULL COMMENT '',
   `Firstname` VARCHAR(45) NULL COMMENT '',
   `Role` VARCHAR(45) NULL COMMENT '',
-  `CityId` VARCHAR(45) NULL COMMENT '',
+  `CityId` VARCHAR(10) NULL COMMENT '',
+  `EmailAdd` VARCHAR(45) NULL COMMENT '',
+  `Initials` VARCHAR(6) NULL COMMENT '',
   PRIMARY KEY (`EmployeePK`)  COMMENT '')
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Instrument`
+-- Table `landfill-data`.`Instrument`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Instrument` ;
+DROP TABLE IF EXISTS `landfill-data`.`Instrument` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Instrument` (
+CREATE TABLE IF NOT EXISTS `landfill-data`.`Instrument` (
   `InstrumentPK` INT NOT NULL COMMENT '',
   `ManufacturerSerialNumber` VARCHAR(45) NULL COMMENT '',
   `Model` VARCHAR(45) NULL COMMENT '',
@@ -47,45 +49,45 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Site`
+-- Table `landfill-data`.`Site`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Site` ;
+DROP TABLE IF EXISTS `landfill-data`.`Site` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Site` (
+CREATE TABLE IF NOT EXISTS `landfill-data`.`Site` (
   `SitePK` INT NOT NULL COMMENT '',
-  `Name` VARCHAR(45) NULL COMMENT '',
-  `GridCount` VARCHAR(45) NULL COMMENT '',
-  `SiteCode` VARCHAR(45) NULL COMMENT '',
+  `Name` VARCHAR(60) NULL COMMENT '',
+  `SiteCode` VARCHAR(5) NULL COMMENT '',
+  `ShortName` VARCHAR(10) NULL COMMENT '',
   PRIMARY KEY (`SitePK`)  COMMENT '')
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`SiteSamplingPoint`
+-- Table `landfill-data`.`SamplingPoints`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`SiteSamplingPoint` ;
+DROP TABLE IF EXISTS `landfill-data`.`SamplingPoints` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`SiteSamplingPoint` (
-  `SiteSamplingPointPK` INT NOT NULL AUTO_INCREMENT COMMENT '',
+CREATE TABLE IF NOT EXISTS `landfill-data`.`SamplingPoints` (
+  `SamplingPointsPK` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `SitePK` INT NULL COMMENT '',
-  `PointType` VARCHAR(10) NULL COMMENT '',
-  `PointId` VARCHAR(10) NULL COMMENT '',
-  PRIMARY KEY (`SiteSamplingPointPK`)  COMMENT '',
+  `PointType` VARCHAR(15) NULL COMMENT '',
+  `PointId` VARCHAR(15) NULL COMMENT '',
+  PRIMARY KEY (`SamplingPointsPK`)  COMMENT '',
   INDEX `SitePK_idx` (`SitePK` ASC)  COMMENT '',
   CONSTRAINT `SitePK`
     FOREIGN KEY (`SitePK`)
-    REFERENCES `mydb`.`Site` (`SitePK`)
+    REFERENCES `landfill-data`.`Site` (`SitePK`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`InstantaneousData`
+-- Table `landfill-data`.`InstantaneousData`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`InstantaneousData` ;
+DROP TABLE IF EXISTS `landfill-data`.`InstantaneousData` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`InstantaneousData` (
+CREATE TABLE IF NOT EXISTS `landfill-data`.`InstantaneousData` (
   `InstantaneousDataPK` INT NOT NULL COMMENT '',
   `SitePK` INT NULL COMMENT '',
   `EmployeePK` INT NULL COMMENT '',
@@ -93,84 +95,85 @@ CREATE TABLE IF NOT EXISTS `mydb`.`InstantaneousData` (
   `FinishTime` DATETIME NULL COMMENT '',
   `InstrumentPK` INT NULL COMMENT '',
   `maxCH` VARCHAR(45) NULL COMMENT '',
-  `SiteSamplingPointPK` INT NULL COMMENT '',
+  `SamplingPointsPK` INT NULL COMMENT '',
   PRIMARY KEY (`InstantaneousDataPK`)  COMMENT '',
   INDEX `InspectorId_idx` (`EmployeePK` ASC)  COMMENT '',
   INDEX `InstrumentId_idx` (`InstrumentPK` ASC)  COMMENT '',
   INDEX `LandfillId_idx` (`SitePK` ASC)  COMMENT '',
-  INDEX `SiteSamplingPointPK_idx` (`SiteSamplingPointPK` ASC)  COMMENT '',
+  INDEX `SamplingPointsPK_idx` (`SamplingPointsPK` ASC)  COMMENT '',
   CONSTRAINT `EmployeePK`
     FOREIGN KEY (`EmployeePK`)
-    REFERENCES `mydb`.`Employee` (`EmployeePK`)
+    REFERENCES `landfill-data`.`Employee` (`EmployeePK`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `InstrumentPK`
     FOREIGN KEY (`InstrumentPK`)
-    REFERENCES `mydb`.`Instrument` (`InstrumentPK`)
+    REFERENCES `landfill-data`.`Instrument` (`InstrumentPK`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `SitePK`
     FOREIGN KEY (`SitePK`)
-    REFERENCES `mydb`.`Site` (`SitePK`)
+    REFERENCES `landfill-data`.`Site` (`SitePK`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `SiteSamplingPointPK`
-    FOREIGN KEY (`SiteSamplingPointPK`)
-    REFERENCES `mydb`.`SiteSamplingPoint` (`SiteSamplingPointPK`)
+  CONSTRAINT `SamplingPointsPK`
+    FOREIGN KEY (`SamplingPointsPK`)
+    REFERENCES `landfill-data`.`SamplingPoints` (`SamplingPointsPK`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`IntegrateData`
+-- Table `landfill-data`.`IntegrateData`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`IntegrateData` ;
+DROP TABLE IF EXISTS `landfill-data`.`IntegrateData` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`IntegrateData` (
+CREATE TABLE IF NOT EXISTS `landfill-data`.`IntegrateData` (
   `IntegrateSurveyId` INT NOT NULL COMMENT '',
   PRIMARY KEY (`IntegrateSurveyId`)  COMMENT '')
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`IME`
+-- Table `landfill-data`.`IME`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`IME` ;
+DROP TABLE IF EXISTS `landfill-data`.`IME` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`IME` (
+CREATE TABLE IF NOT EXISTS `landfill-data`.`IME` (
   `IMEPK` INT NOT NULL COMMENT '',
-  `CreateDate` DATETIME NULL COMMENT '',
+  `ReadingDate` DATETIME NULL COMMENT '',
   `Description` VARCHAR(245) NULL COMMENT '',
   `EmployeePK` INT NULL COMMENT '',
   `Value` VARCHAR(45) NULL COMMENT '',
+  `IMENumber` VARCHAR(9) NULL COMMENT '',
   PRIMARY KEY (`IMEPK`)  COMMENT '',
   INDEX `EmployeePK_idx` (`EmployeePK` ASC)  COMMENT '',
   CONSTRAINT `EmployeePK`
     FOREIGN KEY (`EmployeePK`)
-    REFERENCES `mydb`.`Employee` (`EmployeePK`)
+    REFERENCES `landfill-data`.`Employee` (`EmployeePK`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`IMEInstantaneousPair`
+-- Table `landfill-data`.`IMEPairing`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`IMEInstantaneousPair` ;
+DROP TABLE IF EXISTS `landfill-data`.`IMEPairing` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`IMEInstantaneousPair` (
+CREATE TABLE IF NOT EXISTS `landfill-data`.`IMEPairing` (
   `IMEPK` INT NOT NULL COMMENT '',
   `InstantaneousDataPK` INT NOT NULL COMMENT '',
   INDEX `InstantaneousDataPK_idx` (`InstantaneousDataPK` ASC)  COMMENT '',
   CONSTRAINT `InstantaneousDataPK`
     FOREIGN KEY (`InstantaneousDataPK`)
-    REFERENCES `mydb`.`InstantaneousData` (`InstantaneousDataPK`)
+    REFERENCES `landfill-data`.`InstantaneousData` (`InstantaneousDataPK`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `IMEPK`
     FOREIGN KEY (`IMEPK`)
-    REFERENCES `mydb`.`IME` (`IMEPK`)
+    REFERENCES `landfill-data`.`IME` (`IMEPK`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
