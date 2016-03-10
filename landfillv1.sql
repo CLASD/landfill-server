@@ -72,6 +72,7 @@ CREATE TABLE IF NOT EXISTS `landfill-data`.`SamplingPoints` (
   `SitePK` INT NULL COMMENT '',
   `PointType` VARCHAR(15) NULL COMMENT '',
   `PointId` VARCHAR(15) NULL COMMENT '',
+  `Status` VARCHAR(45) NULL COMMENT '',
   PRIMARY KEY (`SamplingPointsPK`)  COMMENT '',
   INDEX `SitePK_idx` (`SitePK` ASC)  COMMENT '',
   CONSTRAINT `SitePK`
