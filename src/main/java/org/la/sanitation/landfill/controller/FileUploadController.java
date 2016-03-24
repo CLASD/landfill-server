@@ -25,7 +25,7 @@ public class FileUploadController {
 	@Resource
 	private InstantaneousProcessor instantaneousProcessor;
 
-    @RequestMapping(value="/upload", method=RequestMethod.POST)
+	@RequestMapping(value="/upload", method=RequestMethod.POST)
     public @ResponseBody String handleFileUpload( @RequestParam("file") MultipartFile file){
     	
     	String filename = null;
