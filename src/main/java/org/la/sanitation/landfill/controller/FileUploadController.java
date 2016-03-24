@@ -1,4 +1,4 @@
-package org.la.sanitation.landfill;
+package org.la.sanitation.landfill.controller;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
