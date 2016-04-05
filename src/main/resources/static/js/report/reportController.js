@@ -1,7 +1,7 @@
 angular.module('reportController', ['ngCookies'])
 	.controller('reportController',
-	['$scope' , function ($scope )
+	['$scope' , '$cookies', function ($scope, $cookies)
 	{
-		$scope.report = 'blah';
+		$scope.reportName = "IME";
 
 	}]);

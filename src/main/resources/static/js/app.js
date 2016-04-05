@@ -1,5 +1,5 @@
 angular.module('app', ['ngRoute', 'ngResource',
-'reportController', 'ngCookies',
+'reportController', 'reportService', 'ngCookies',
 'ngSanitize'])
   .config(['$routeProvider', '$locationProvider',
     function ($routeProvider, $locationProvider, $cookies) {
