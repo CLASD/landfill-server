@@ -11,13 +11,13 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
-@Table(name="LandfillSite")
+@Table(name="Site")
 @DynamicUpdate
 @SelectBeforeUpdate
-public class LandfillSite {
+public class Site {
 	
 	@Id
-    @Column(name="LandfillSiteId")
+    @Column(name="SiteId")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 	private String name;

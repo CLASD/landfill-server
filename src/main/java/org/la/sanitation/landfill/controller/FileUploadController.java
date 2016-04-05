@@ -25,7 +25,7 @@ public class FileUploadController {
 	@Resource
 	private InstantaneousProcessor instantaneousProcessor;
 
-	@RequestMapping(value="/upload", method=RequestMethod.POST)
+	@RequestMapping(value="/file", method=RequestMethod.POST)
     public @ResponseBody String handleFileUpload( @RequestParam("file") MultipartFile file){
     	
     	String filename = null;
@@ -51,6 +51,14 @@ public class FileUploadController {
         } else {
             return "You failed to upload " + filename + " because the file was empty.";
         }
+    }
+
+    @RequestMapping(value = "/{path:[^\\.]*}")
+    public String redirect() {
+        // Forward to home page so that route is preserved.
+        System.out.printf("before redirect");
+
+        return "forward:/";
     }
 
 }
