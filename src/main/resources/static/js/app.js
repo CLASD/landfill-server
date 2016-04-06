@@ -5,7 +5,7 @@ angular.module('app', ['ngRoute', 'ngResource',
     function ($routeProvider, $locationProvider, $cookies) {
       $routeProvider
         .when('/', {
-          templateUrl: 'views/upload.html',
+          templateUrl: 'views/home.html',
           controller: 'reportController'
           // resolve:{
           //   history: function ($route, sessionService) {
@@ -17,6 +17,10 @@ angular.module('app', ['ngRoute', 'ngResource',
           //     return res;
           //   }
           // }
+        })
+        .when('/home', {
+          templateUrl: 'views/home.html',
+          controller: 'reportController'
         })
         .when('/upload', {
           templateUrl: 'views/upload.html',
@@ -36,6 +40,14 @@ angular.module('app', ['ngRoute', 'ngResource',
 //            }
 //          }
 
+        })
+        .when('/ime', {
+          templateUrl: 'views/reports/ime.html',
+          controller: 'reportController'
+        })
+        .when('/hotspot-status', {
+          templateUrl: 'views/reports/hotspotstatus.html',
+          controller: 'reportController'
         })
         .otherwise({
           redirectTo: '/'

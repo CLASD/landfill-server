@@ -1,0 +1,38 @@
+  <h3 align="center">Hot-Spot Monthly Tracking Sheet</h3>
+  <h3 align="center">MONTH OF <i><u>January 2016</u></i> for the <i><u>Toyon</u></i> Landfill</h3>    
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>IME #</th>
+        <th>GRID(s)</th>
+        <th>FOUND BY</th>
+		<th>FOUND ON</th>
+		<th>Repaired?</th>
+		<th>Recheck Date</th>
+		<th>Pass / Fail</th>
+		<th>Repaired?</th>
+		<th>Recheck Date</th>
+		<th>Pass / Fail</th>
+		<th>Repaired?</th>
+		<th>Recheck Date</th>
+		<th>Pass / Fail</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="data in hotspotstatusData">
+		<td>{{data.imenum}}</td>
+		<td>{{data.grid}}</td>
+		<td>{{data.foundby}}</td>
+		<td>{{data.founddate}}</td>
+		<td>{{data.repaired1}}</td>
+		<td>{{data.recheckdate1}}</td>
+		<td>{{data.passedfail1}}</td>
+		<td>{{data.repaired2}}</td>
+		<td>{{data.recheckdate2}}</td>
+		<td>{{data.passedfail2}}</td>
+		<td>{{data.repaired3}}</td>
+		<td>{{data.recheckdate3}}</td>
+		<td>{{data.passedfail3}}</td>
+      </tr>
+    </tbody>
+  </table>
