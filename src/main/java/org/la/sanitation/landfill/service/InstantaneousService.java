@@ -2,6 +2,7 @@ package org.la.sanitation.landfill.service;
 
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class InstantaneousProcessor {
+public class InstantaneousService {
 	
 	@Resource
 	private InstantaneousDao instantaneousDao;
@@ -26,14 +27,22 @@ public class InstantaneousProcessor {
 		InstantaneousData data = new InstantaneousData();
 		
 		data.setStartTime(new Date());
-		data.setEndTime(new Date());
-		data.setInspectorId(1);
-		data.setLandfillId(1);
-		data.setInstrumentSerial(1);
-		data.setMaxCH("89.98");
+		data.setFinishTime(new Date());
+		data.setEmployeePK(1);
+		data.setSitePK(1);
+		data.setInstrumentPK(1);
+		data.setSamplingPointPK(1);
+		data.setMaxCH4("89.98");
 		
 		instantaneousDao.save(data);
 		
+	}
+
+	@Transactional
+	public List<InstantaneousData> getInstantaneousData() {
+
+		return instantaneousDao.findAll();
+
 	}
 
 }

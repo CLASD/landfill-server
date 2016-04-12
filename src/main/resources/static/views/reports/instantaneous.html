@@ -1,0 +1,29 @@
+<div class="container">
+    <h3 align="center">Instantaneous Data</h3>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Landfill</th>
+            <th>Exceedance Type</th>
+            <th>IME # / Probe</th>
+            <th>Grid / Depth</th>
+            <th>Repair Description</th>
+            <th>Initial ppmv</th>
+            <th>Recheck</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="data in results">
+            <td>{{data.date}}</td>
+            <td>{{data.sitePK}}</td>
+            <td>{{data.type}}</td>
+            <td>{{data.imeprobe}}</td>
+            <td>{{data.grid}}</td>
+            <td>{{data.repairdesc}}</td>
+            <td>{{data.initialppmv}}</td>
+            <td>{{data.recheck}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -7,16 +7,7 @@ angular.module('app', ['ngRoute', 'ngResource',
         .when('/', {
           templateUrl: 'views/home.html',
           controller: 'reportController'
-          // resolve:{
-          //   history: function ($route, sessionService) {
-          //     res = sessionService.query({
-          //     }, function (response) {
-          //       console.log(response);
-          //       return response;
-          //     });
-          //     return res;
-          //   }
-          // }
+
         })
         .when('/home', {
           templateUrl: 'views/home.html',
@@ -25,6 +16,20 @@ angular.module('app', ['ngRoute', 'ngResource',
         .when('/upload', {
           templateUrl: 'views/upload.html',
           controller: 'reportController'
+        })
+        .when('/instantaneous', {
+          templateUrl: 'views/reports/instantaneous.html',
+          controller: 'reportController',
+           resolve:{
+             results: function ($route, reportController) {
+               res = reportController.instantData({
+               }, function (response) {
+                 console.log(response);
+                 return response;
+               });
+               return res;
+             }
+           }
         })
         .when('/report', {
           templateUrl: 'views/report.html',

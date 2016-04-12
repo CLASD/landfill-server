@@ -24,72 +24,80 @@ public class InstantaneousData implements Serializable{
 	 */
 	private static final long serialVersionUID = -8398045443579334587L;
 	@Id
-    @Column(name="InstantaneousDataId")
+    @Column(name="InstantaneousDataPK")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer instantaneousDataId;
-	private Integer landfillId;
-	private Integer inspectorId;
+	private Integer instantaneousDataPK;
+	private Integer sitePK;
+	private Integer employeePK;
 	private Date startTime;
 	private Date finishTime;
-	
-	private Integer InstrumentSerial;
-	private String maxCH;
-	private String IMEId;
-	private Integer gridNo;
-	
-	public Integer getInstantaneousDataId() {
-		return instantaneousDataId;
+	private Integer InstrumentPK;
+	private String maxCH4;
+	private Integer samplingPointPK;
+
+	public Integer getInstantaneousDataPK() {
+		return instantaneousDataPK;
 	}
-	public void setInstantaneousDataId(Integer instantaneousDataId) {
-		this.instantaneousDataId = instantaneousDataId;
+
+	public void setInstantaneousDataPK(Integer instantaneousDataId) {
+		this.instantaneousDataPK = instantaneousDataId;
 	}
-	public Integer getLandfillId() {
-		return landfillId;
+
+	public Integer getSitePK() {
+		return sitePK;
 	}
-	public void setLandfillId(Integer landfillId) {
-		this.landfillId = landfillId;
+
+	public void setSitePK(Integer sitePK) {
+		this.sitePK = sitePK;
 	}
-	public Integer getInspectorId() {
-		return inspectorId;
+
+	public Integer getEmployeePK() {
+		return employeePK;
 	}
-	public void setInspectorId(Integer inspectorId) {
-		this.inspectorId = inspectorId;
+
+	public void setEmployeePK(Integer employeePK) {
+		this.employeePK = employeePK;
 	}
+
 	public Date getStartTime() {
 		return startTime;
 	}
+
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
-	public Date getEndTime() {
+
+	public Date getFinishTime() {
 		return finishTime;
 	}
-	public void setEndTime(Date endTime) {
-		this.finishTime = endTime;
+
+	public void setFinishTime(Date finishTime) {
+		this.finishTime = finishTime;
 	}
-	public Integer getInstrumentSerial() {
-		return InstrumentSerial;
+
+	public Integer getInstrumentPK() {
+		return InstrumentPK;
 	}
-	public void setInstrumentSerial(Integer instrumentSerial) {
-		InstrumentSerial = instrumentSerial;
+
+	public void setInstrumentPK(Integer instrumentPK) {
+		InstrumentPK = instrumentPK;
 	}
-	public String getMaxCH() {
-		return maxCH;
+
+	public String getMaxCH4() {
+		return maxCH4;
 	}
-	public void setMaxCH(String maxCH) {
-		this.maxCH = maxCH;
+
+	public void setMaxCH4(String maxCH4) {
+		this.maxCH4 = maxCH4;
 	}
-	public String getIMEId() {
-		return IMEId;
+
+	public Integer getSamplingPointPK() {
+		return samplingPointPK;
 	}
-	public void setIMEId(String iMEId) {
-		IMEId = iMEId;
+
+	public void setSamplingPointPK(Integer samplingPointPK) {
+		this.samplingPointPK = samplingPointPK;
 	}
-	public Integer getGridNo() {
-		return gridNo;
-	}
-	public void setGridNo(Integer gridNo) {
-		this.gridNo = gridNo;
-	}
+
 
 }
