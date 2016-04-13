@@ -1,8 +1,5 @@
 package org.la.sanitation.landfill;
 
-import java.io.File;
-import java.io.IOException;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
+import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateExceptionHandler;
 
@@ -17,7 +15,7 @@ import freemarker.template.TemplateExceptionHandler;
 @ComponentScan(basePackages = { "org.la.sanitation.*" })
 @PropertySource("application.properties")
 public class LandfillServiceApplication {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(LandfillServiceApplication.class, args);
 	}
@@ -29,10 +27,12 @@ public class LandfillServiceApplication {
 	}
 	
 	@Bean
-	public Configuration freeMarkerConfiguration() throws IOException
+	public Configuration freeMarkerConfiguration() throws Exception
 	{
+		
 		Configuration cfg = new Configuration(Configuration.VERSION_2_3_24);
-		cfg.setDirectoryForTemplateLoading(new File("/where/you/store/templates"));
+		ClassTemplateLoader ctl = new ClassTemplateLoader(getClass(), "/freemarker");
+		cfg.setTemplateLoader(ctl);
 		cfg.setDefaultEncoding("UTF-8");
 		cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 		cfg.setLogTemplateExceptions(false);
