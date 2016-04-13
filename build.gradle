@@ -31,12 +31,14 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile 'org.springframework:spring-context-support:4.1.3.RELEASE'
 	compile 'com.fasterxml.jackson.core:jackson-core:2.7.1'
 	compile 'com.fasterxml.jackson.core:jackson-annotations:2.7.1'
 	compile 'org.hibernate:hibernate-core:4.3.5.Final'
 	compile 'org.hibernate:hibernate-entitymanager:4.3.5.Final'
 	compile 'com.zaxxer:HikariCP-java6:2.3.12'
 	compile 'org.freemarker:freemarker:2.3.24-incubating'
+	compile 'javax.mail:mail:1.4.7'
 	
 	compile 'net.sourceforge.jtds:jtds:1.3.1'
 	compile 'org.springframework:spring-orm:4.0.3.RELEASE'

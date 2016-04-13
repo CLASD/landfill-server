@@ -1,6 +1,6 @@
 angular.module('reportController', ['ngCookies'])
 	.controller('reportController',
-	['$scope' , '$cookies', function ($scope, $cookies)
+	['$scope' , '$cookies', '$http', function ($scope, $cookies, $http)
 	{
 		$scope.reportName = "IME";
 		
@@ -24,10 +24,27 @@ angular.module('reportController', ['ngCookies'])
 		$scope.sites = ['Bishops', 'Gaffey', 'Lopez', 'Sheldon', 'Toyon'];
 
 		$scope.instantData = function(){
-			$http.get('http://localhost:9090/instantaneous').
+			$http.get('http://localhost:9091/instantaneous').
 				success(function(data) {
 					$scope.results = data;
 				});
-		}
+		};
+		
+		$scope.sendEmail = function(messageType) {
+
+//			searchService.query({
+////				searchString: str,
+////				sessionId: $cookies.get('tv_sessionId')
+//			}, function (response) {
+//				$scope.result = response;
+//				console.log($scope.result);
+//			});
+			
+			$http.get('http://localhost:9091/data/email?messageType=' + messageType).
+			success(function(data) {
+				$scope.results = data;
+			});
+
+		};
 
 	}]);
