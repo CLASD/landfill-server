@@ -3,17 +3,19 @@
   <a href="" ><span class="pull-right glyphicon glyphicon-share"></span></a>
   <a href="" ><span class="pull-right glyphicon glyphicon-search"></span></a>
   <h3 align="center">MONTH OF 
-  <select>
-	  <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
-  </select>
-  <select>
-	  <option ng-repeat="year in years" value="{{year}}">{{year}}</option>
-  </select>
-   for the 
-  <select>
-	  <option ng-repeat="site in sites" value="{{site}}">{{site}}</option>
-  </select>
-	Landfill</h3>    
+	  <select name="month">
+		  <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
+	  </select>
+	  <select name="year">
+		  <option ng-repeat="year in years" value="{{year}}">{{year}}</option>
+	  </select>
+	   for the 
+	  <select name="site">
+		  <option ng-repeat="site in sites" value="{{site}}">{{site}}</option>
+	  </select>
+	  Landfill
+	  <button type="button" class="btn btn-success" ng-click="">Generate</button> 
+  </h3>
   <table class="table table-bordered table-striped">
     <thead>
       <tr>
