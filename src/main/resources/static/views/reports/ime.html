@@ -1,21 +1,19 @@
   <h3 align="center">City of Los Angeles Landfill Exceedance Report</h3>
-<<<<<<< HEAD
   <h3 align="center">
-	  Filter By:
-	  <select name="filter">
-	  	<option value="date">Date</option>
-	  	<option value="landfill">Landfill</option>
-	  	<option value="exceedance">Exceedance Type</option>
-	  	<option value="ime">Ime # / Probe</option>
-	  	<option value="probe">Grid / Depth</option>
+  <form ng-submit="getImeData()">
+	  Site:
+	  <select name="imeSite" ng-model=selectedSite>
+	  	<option ng-repeat="site in sites" value="{{site}}">{{site}}</option>
 	  </select>
-	  <button type="button" class="btn btn-success" ng-click="">Submit</button>
+	  <select name="imePointType" ng-model=selectedType>
+		  <option ng-repeat="type in types" value="{{type}}">{{type}}</option>
+	  </select>
+	  <button type="submit" value="submit" class="btn btn-success">Generate</button>
+	  </form>
   </h3>   
-=======
     <a href="" ><span class="pull-right glyphicon glyphicon-download-alt"></span></a>
 <a class="pull-right glyphicon glyphicon-share" ng-click="sendEmail('ime')"></a>
   <a href="" ><span class="pull-right glyphicon glyphicon-search"></span></a>         
->>>>>>> dca20493f2a6d7fd8b7414a3692512578a240984
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -31,13 +29,13 @@
     </thead>
     <tbody>
       <tr ng-repeat="data in imeData">
-        <td>{{data.date}}</td>
-		<td>{{data.landfill}}</td>
-        <td>{{data.type}}</td>
-		<td>{{data.imeprobe}}</td>
+        <td>{{data.readingDate}}</td>
+		<td>{{data.siteName}}</td>
+        <td>{{data.pointType}}</td>
+		<td>{{data.imeNumber}}</td>
         <td>{{data.grid}}</td>
-		<td>{{data.repairdesc}}</td>
-        <td>{{data.initialppmv}}</td>
+		<td>{{data.description}}</td>
+        <td>{{data.value}}</td>
 		<td>{{data.recheck}}</td>
       </tr>
     </tbody>

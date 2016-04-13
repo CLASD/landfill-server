@@ -2,6 +2,7 @@ package org.la.sanitation.landfill.controller;
 
 import org.la.sanitation.landfill.entity.Ime;
 import org.la.sanitation.landfill.entity.InstantaneousData;
+import org.la.sanitation.landfill.persistence.ImeDao;
 import org.la.sanitation.landfill.persistence.InstantaneousDao;
 import org.la.sanitation.landfill.service.EmailSender;
 import org.la.sanitation.landfill.service.InstantaneousService;
@@ -33,6 +34,10 @@ public class ReportController {
     @Resource
     private InstantaneousService instantaneousService;
     
+    //TODO: use a service class
+    @Resource
+    private ImeDao imeDao;
+    
     @Resource(name="")
     private EmailSender emailSenderFreemarker;
 
@@ -54,13 +59,21 @@ public class ReportController {
     }
     
     @RequestMapping(value="/ime", produces={"application/json"}, method= RequestMethod.GET)
-    public ResponseEntity<List<Ime>> getImeData(
-            @RequestParam("customerId") Integer customerId,
-            @RequestParam(value = "used", required = false, defaultValue = "true" ) boolean used,
-            @RequestParam(value = "excludePersonId", required= false ) Integer excludePersonId,
+    public @ResponseBody List<Ime> getImeData(
+            @RequestParam(value = "site", required = false) String site,
+            @RequestParam(value = "type", required = false) String type,
             @RequestParam(value= "fromDate",required = false ) @DateTimeFormat(pattern = "MMddyyyy") Date fromDate,
             @RequestParam(value= "toDate",required = false ) @DateTimeFormat(pattern = "MMddyyyy") Date toDate)
     {
-            	return null;
+    	System.out.println("site " + site );
+    	System.out.println("type " + type );
+    	
+    	if(site.equalsIgnoreCase("undefined"))
+    		site = null;
+    	
+    	if(type.equalsIgnoreCase("undefined"))
+    		type = null;
+    	
+    	return imeDao.findIme(site, null, type);
     }
 }

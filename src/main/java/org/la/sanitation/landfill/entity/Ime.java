@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
@@ -27,6 +28,10 @@ public class Ime {
 	private Integer employeePK;
 	private String value;
 	private String imeNumber;
+	@Transient
+	private String pointType;
+	@Transient 
+	private String siteName;
 	
 	public int getId() {
 		return id;
@@ -63,6 +68,18 @@ public class Ime {
 	}
 	public void setImeNumber(String imeNumber) {
 		this.imeNumber = imeNumber;
+	}
+	public String getPointType() {
+		return pointType;
+	}
+	public void setPointType(String pointType) {
+		this.pointType = pointType;
+	}
+	public String getSiteName() {
+		return siteName;
+	}
+	public void setSiteName(String siteName) {
+		this.siteName = siteName;
 	}
 
 }
