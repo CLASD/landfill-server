@@ -13,7 +13,7 @@ import freemarker.template.Template;
 @Service("emailSenderFreeMarker")
 public class EmailSenderFreeMarker implements EmailSender{
 	
-	@Resource ( name = "freemarkerConfiguration")
+	@Resource ( name = "freeMarkerConfiguration")
     private Configuration freeMarkerConfig;
 
 	@Override
