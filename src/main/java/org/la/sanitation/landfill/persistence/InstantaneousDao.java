@@ -15,7 +15,7 @@ public class InstantaneousDao<T> {
 	@Resource ( name = "landfillSessionFactory")
     private SessionFactory sessionFactory;
 	
-	public void save(T t) {
+	public void save(InstantaneousData t) {
 		sessionFactory.getCurrentSession().save(t);
     }
 
