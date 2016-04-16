@@ -3,6 +3,7 @@
   <form ng-submit="getImeData()">
 	  Site:
 	  <select name="imeSite" ng-model=selectedSite>
+		<!-- Fix default option bug -->
 	  	<option ng-repeat="site in sites" value="{{site}}">{{site}}</option>
 	  </select>
 	  <select name="imePointType" ng-model=selectedType>

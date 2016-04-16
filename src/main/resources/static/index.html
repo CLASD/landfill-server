@@ -22,22 +22,30 @@
 		<script src="js/app.js"></script>
 		<script src="js/report/reportService.js"></script>
 		<script src="js/report/reportController.js"></script>
-
 	</head>
 	<body ng-app="app">
-
 		<nav class="navbar navbar-inverse navbar-static-top">
 			<div class="navbar-header">
-				<h4 class="navbar-brand" href="#">Landfill Manager</a>
+				<h4 class="navbar-brand" href="#">Landfill Data Manager</a>
 			</div>
-		<ul class="nav navbar-nav">
-			<li><a href="/">Home</a></li>
-			<li><a ng-href="/upload">Upload</a></li>
-			<li><a ng-href="/report">Reports</a></li>
-		</ul>
+			<ul class="nav navbar-nav">
+				<li><a href="/">Home</a></li>
+				<li><a ng-href="/upload">Upload</a></li>
+				<li><a ng-href="/report">Reports</a></li>
+			</ul>
 		</nav>
-
-		<div class="container" ng-view></div>
-
+			
+		<center><img src="images/la-san.png"/></center></br></br>
+	
+		<div class="container" ng-view></div></br></br>
+			
+	   <footer class="footer">
+	     <div class="container">
+	       <center>
+	       <p>About | Contact | FAQ</p>
+	       <p>© 2016 City of Los Angeles</p>
+	       </center>
+	     </div>
+	   </footer>
 	</body>
 </html>
