@@ -21,17 +21,14 @@ angular.module('reportController', ['ngCookies'])
 		
 		$scope.years = ['2011', '2012', '2013', '2014', '2015', '2016'];
 		
-		$scope.sites = ['Bishops', 'Gaffey', 'Lopez', 'Sheldon', 'Toyon'];
+		$scope.sites = ['Bishops', 'Gaffey', 'Lopez', 'Sheldon', 'Toyon'];		
 		
-		$scope.types = ['Probe', 'Well', 'Grid'];
-
 		$scope.instantData = function(){
 			$http.get('http://localhost:9091/instantaneous').
 				success(function(data) {
 					$scope.results = data;
 				});
 		};
-		
 		
 		$scope.getImeData = function(site){
 			
@@ -65,4 +62,20 @@ angular.module('reportController', ['ngCookies'])
 
 		};
 
-	}]);
+	}])
+	.controller('selectTypeController', function($scope, $element) {
+		$scope.types = ['Probes', 'Instantaneous', 'Integrated', 'Leak Check', 'All'];
+		
+	    $scope.searchTerm;
+	    
+	    $scope.clearSearchTerm = function() {
+	    	$scope.searchTerm = '';
+	    };
+	    
+	    // The md-select directive eats keydown events for some quick select
+	    // logic. Since we have a search input here, we don't need that logic.
+	    
+	    $element.find('input').on('keydown', function(ev) {
+	    	ev.stopPropagation();
+	    });
+	});

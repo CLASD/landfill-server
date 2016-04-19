@@ -6,7 +6,33 @@
 		<!-- Fix default option bug -->
 	  	<option ng-repeat="site in sites" value="{{site}}">{{site}}</option>
 	  </select>
-	  <select name="imePointType" ng-model=selectedType>
+	  Exceedance Type: 
+	<div ng-controller="selectTypeController" class="md-padding" ng-cloak>
+	  <div>
+	    <div layout="row">
+	      <md-input-container>
+	        <label>Types</label>
+	        <md-select ng-model="selectedVegetables"
+	                   md-on-close="clearSearchTerm()"
+	                   data-md-container-class="selectdemoSelectHeader"
+	                   multiple>
+	          <md-select-header class="demo-select-header">
+	            <input ng-model="searchTerm"
+	                   type="search"
+	                   placeholder="Search for a type..."
+	                   class="demo-header-searchbox _md-text">
+	          </md-select-header>
+	          <md-optgroup label="type">
+	            <md-option ng-value="type" ng-repeat="type in types |
+	              filter:searchTerm">{{type}}</md-option>
+	          </md-optgroup>
+	        </md-select>
+	      </md-input-container>
+	    </div>
+	 </div>
+	</div>
+ 	  Date Range:
+ 	  <select name="imePointType" ng-model=selectedType>
 		  <option ng-repeat="type in types" value="{{type}}">{{type}}</option>
 	  </select>
 	  <button type="submit" value="submit" class="btn btn-success">Generate</button>
@@ -26,7 +52,6 @@
 		<th>Repair Description</th>
 		<th>Initial ppmv</th>
 		<th>Recheck</th>
-		<th>Edit</th>
       </tr>
     </thead>
     <tbody>
@@ -39,7 +64,6 @@
 		<td>{{data.description}}</td>
         <td>{{data.value}}</td>
 		<td>{{data.recheck}}</td>
-		<td><a href="" ><span class="pull-right glyphicon glyphicon glyphicon-edit"></span></a></td>
       </tr>
     </tbody>
   </table>

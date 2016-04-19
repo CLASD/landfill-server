@@ -46,8 +46,8 @@ angular.module('app', ['ngRoute', 'ngResource',
 //          }
 
         })
-        .when('/ime', {
-          templateUrl: 'views/reports/ime.html',
+        .when('/exceedance-report', {
+          templateUrl: 'views/reports/exceedancereport.html',
           controller: 'reportController'
         })
         .when('/hotspot-status', {
