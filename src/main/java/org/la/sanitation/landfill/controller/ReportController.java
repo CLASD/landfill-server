@@ -2,8 +2,10 @@ package org.la.sanitation.landfill.controller;
 
 import org.la.sanitation.landfill.entity.Ime;
 import org.la.sanitation.landfill.entity.InstantaneousData;
+import org.la.sanitation.landfill.entity.Ise;
 import org.la.sanitation.landfill.persistence.ImeDao;
 import org.la.sanitation.landfill.persistence.InstantaneousDao;
+import org.la.sanitation.landfill.persistence.IseDao;
 import org.la.sanitation.landfill.service.EmailSender;
 import org.la.sanitation.landfill.service.InstantaneousService;
 import org.la.sanitation.landfill.service.TemplateType;
@@ -38,6 +40,9 @@ public class ReportController {
     @Resource
     private ImeDao imeDao;
     
+    @Resource 
+    private IseDao iseDao;
+    
     @Resource(name="")
     private EmailSender emailSenderFreemarker;
 
@@ -58,7 +63,7 @@ public class ReportController {
     	return new ResponseEntity(HttpStatus.OK);
     }
     
-    @RequestMapping(value="/ime", produces={"application/json"}, method= RequestMethod.GET)
+    @RequestMapping(value="/exceedance/ime", produces={"application/json"}, method= RequestMethod.GET)
     public @ResponseBody List<Ime> getImeData(
             @RequestParam(value = "site", required = false) String site,
             @RequestParam(value = "type", required = false) String type,
@@ -68,12 +73,34 @@ public class ReportController {
     	System.out.println("site " + site );
     	System.out.println("type " + type );
     	
-    	if(site.equalsIgnoreCase("undefined"))
+    	if(site != null && site.equalsIgnoreCase("undefined"))
     		site = null;
     	
-    	if(type.equalsIgnoreCase("undefined"))
+    	if(type !=null && (type.equalsIgnoreCase("undefined") || type.equalsIgnoreCase("all") ) )
     		type = null;
     	
     	return imeDao.findIme(site, null, type);
     }
+    
+    @RequestMapping(value="/exceedance/ise", produces={"application/json"}, method= RequestMethod.GET)
+    public @ResponseBody List<Ise> getIseData(
+            @RequestParam(value = "site", required = false) String site,
+            @RequestParam(value = "type", required = false) String type,
+            @RequestParam(value= "fromDate",required = false ) @DateTimeFormat(pattern = "MMddyyyy") Date fromDate,
+            @RequestParam(value= "toDate",required = false ) @DateTimeFormat(pattern = "MMddyyyy") Date toDate)
+    {
+    	System.out.println("site " + site );
+    	System.out.println("type " + type );
+    	
+    	if(site != null && site.equalsIgnoreCase("undefined"))
+    		site = null;
+    	
+    	if(type !=null && (type.equalsIgnoreCase("undefined") || type.equalsIgnoreCase("all") ) )
+    	{
+    		type = null;
+    	}
+    	
+    	return iseDao.findIse(site, null, type);
+    }
+    
 }

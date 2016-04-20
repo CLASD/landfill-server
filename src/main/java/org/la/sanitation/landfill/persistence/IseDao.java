@@ -8,42 +8,25 @@ import javax.annotation.Resource;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.ResultTransformer;
-import org.hibernate.type.IntegerType;
-import org.hibernate.type.StringType;
 import org.la.sanitation.landfill.entity.Ime;
+import org.la.sanitation.landfill.entity.Ise;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * 
- * @author susansun
- *
- * @param <T>
- */
 @Repository
-public class ImeDao<T> {
+public class IseDao {
 	
 	@Resource ( name = "landfillSessionFactory")
     private SessionFactory sessionFactory;
+
 	
-	/**
-	 * 
-	 * @return
-	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Ime> findIme(String site, String employee, String samplingType)
+	public List<Ise> findIse(String site, String employee, String samplingType)
 	{
 		
-		//with the current db design, querying ime table is a pain. Never let a non technical person design anything 
-//		Criteria cr = sessionFactory.getCurrentSession().createCriteria(Ime.class);
-//		
-//		if(site != null){
-//			cr.add(Restrictions.eq("sitePK", 1));
-//		}
-		
-		String sql = "select i.*, sp.PointType, s.Name from IME i "
-				+ "left join IMEPairing ip on i.IMEPK =  ip.IMEPK "
+		String sql = "select i.*, sp.PointType, s.Name from ISE i "
+				+ "left join ISEPairing ip on i.ISEPK =  ip.ISEPK "
 				+ "left join SamplingPoint sp on ip.SamplingPointPK =  sp.SamplingPointsPK "
 				+ "left join Site s on sp.SitePK = s.SitePK "; 
 		
@@ -52,7 +35,7 @@ public class ImeDao<T> {
 			sql += " where s.Name = :site ";
 			
 		}
-
+		
 		sql+= ";";
 		System.out.println(sql);
 		SQLQuery q = sessionFactory.getCurrentSession().createSQLQuery(sql);
@@ -63,20 +46,20 @@ public class ImeDao<T> {
 			
 		}
 		
-		List<Ime> result = q.setResultTransformer(new ResultTransformer() {
+		List<Ise> result = q.setResultTransformer(new ResultTransformer() {
                     @Override
                     public Object transformTuple(Object[] tuple, String[] aliases) {
                         short index = 0;
-                        Ime ime = new Ime();
-                        ime.setId((Integer) tuple[index++]);
-                        ime.setReadingDate((Date) tuple[index++]);
-                        ime.setDescription((String) tuple[index++]);
-                        ime.setEmployeePK((Integer) tuple[index++]);
-                        ime.setValue((String) tuple[index++]);
-                        ime.setImeNumber((String) tuple[index++]);
-                        ime.setPointType((String) tuple[index++]);
-                        ime.setSiteName((String) tuple[index++]);
-                        return ime;
+                        Ise ise = new Ise();
+                        ise.setId((Integer) tuple[index++]);
+                        ise.setReadingDate((Date) tuple[index++]);
+                        ise.setDescription((String) tuple[index++]);
+                        ise.setEmployeePK((Integer) tuple[index++]);
+                        ise.setValue((String) tuple[index++]);
+                        ise.setImeNumber((String) tuple[index++]);
+                        ise.setPointType((String) tuple[index++]);
+                        ise.setSiteName((String) tuple[index++]);
+                        return ise;
                     }
 
                     @Override
@@ -89,7 +72,4 @@ public class ImeDao<T> {
 		
 		return result;
 	}
-	
-		
-
 }

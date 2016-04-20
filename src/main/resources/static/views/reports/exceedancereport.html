@@ -1,47 +1,108 @@
   <h3 align="center">City of Los Angeles Landfill Exceedance Report</h3>
-  <h3 align="center">
-  <form ng-submit="getImeData()">
-	  Site:
+  <h3 align="center"></h3>
+  <div class="row">
+  	
+  <form ng-submit="generateReport()">
+  <div class="row">
+  	<div class="col-md-4" >
+	  <h3>Site:</h3>
 	  <select name="imeSite" ng-model=selectedSite>
 		<!-- Fix default option bug -->
 	  	<option ng-repeat="site in sites" value="{{site}}">{{site}}</option>
 	  </select>
+	  </div>
+	  <div class="col-md-4" >
 	  Exceedance Type: 
-	  <select name="imePointType" ng-model=selectedType>
+	<select name="exceedanceType" ng-model=selectedType>
 		  <option ng-repeat="type in types" value="{{type}}">{{type}}</option>
-	  </select></br>
-	  Date Range:
+	  </select>
+	</div>
+	<div class="col-md-4" >
+ 	  Date Range:
+ 	  
 	  <md-datepicker ng-model="startDate" md-placeholder="Start Date"></md-datepicker>
 	  <md-datepicker ng-model="endDate" md-placeholder="End Date"></md-datepicker>
-	  <button type="submit" value="submit" class="btn btn-success">Generate</button>
+ 	  </div>
+ 	  </div>
+ 	  <div class="row">
+	 	  <div class="col-md-4" >
+		  	<button type="submit" value="submit" class="btn btn-success">Generate Report</button>
+		  </div>
+	  </div>
 	  </form>
-  </h3>   
-    <a href="" ><span class="pull-right glyphicon glyphicon-download-alt"></span></a>
-<a class="pull-right glyphicon glyphicon-share" ng-click="sendEmail('ime')"></a>
-  <a href="" ><span class="pull-right glyphicon glyphicon-search"></span></a>         
+  	</div>
+  </div>
+  
+    <div class="row">
+		<a href="" ><span class="pull-right glyphicon glyphicon-download-alt"></span></a>
+		<a class="pull-right glyphicon glyphicon-share" ng-click="sendEmail('ime')"></a>
+		<a href="" ><span class="pull-right glyphicon glyphicon-search"></span></a>  
+	</div>
+  
+  <div ng-show="imeData.length">
+  <h3>Instantaneous Exceedance Report <small>{{imeData.length}} Total</small></h3>       
   <table class="table table-bordered">
     <thead>
       <tr>
         <th>Date</th>
-        <th>Landfill</th>
-        <th>Exceedance Type</th>
-		<th>IME # / Probe</th>
-		<th>Grid / Depth</th>
+		<th>IME #</th>
+		<th>Grid(s)</th>
 		<th>Repair Description</th>
-		<th>Initial ppmv</th>
-		<th>Recheck</th>
+		<th>Initial reading ppmv</th>
+		<th>Recheck value ppmv</th>
+		<th>Date cleared</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="data in imeData">
         <td>{{data.readingDate}}</td>
-		<td>{{data.siteName}}</td>
-        <td>{{data.pointType}}</td>
 		<td>{{data.imeNumber}}</td>
         <td>{{data.grid}}</td>
 		<td>{{data.description}}</td>
         <td>{{data.value}}</td>
 		<td>{{data.recheck}}</td>
+		<td></td>
+		<td></td>
       </tr>
     </tbody>
   </table>
+  
+  </div>
+  <div class="row">
+		</hr>
+	</div>
+    <div ng-show="iseData.length">
+    <h3>Integrated Exceedance Report <small>{{iseData.length}} Total</small></h3>
+    
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Date Discovered</th>
+		<th>ISE #</th>
+		<th>Grid</th>
+		<th>Repair Description</th>
+		<th>Initial reading ppmv</th>
+		<th>Recheck value ppmv</th>
+		<th>Date cleared</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="data in iseData">
+        <td>{{data.readingDate}}</td>
+		<td>{{data.imeNumber}}</td>
+        <td>{{data.grid}}</td>
+		<td>{{data.description}}</td>
+        <td>{{data.value}}</td>
+		<td>{{data.recheck}}</td>
+		<td></td>
+		<td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  </div>
+    <div class="row">
+		Reports Generated on {{currentTime}}
+	</div>
+  
+  

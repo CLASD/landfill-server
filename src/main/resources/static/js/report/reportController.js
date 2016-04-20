@@ -3,14 +3,6 @@ angular.module('reportController', ['ngCookies', 'ngMaterial', 'ngMessages'])
 	['$scope' , '$cookies', '$http', function ($scope, $cookies, $http, $element)
 	{
 		
-		
-//		$scope.imeData = [
-//	        {date:'1/8/2003', landfill:'GAFFEY', type:'PROBE READING', imeprobe:'8', grid:'B', repairdesc:'', initialppmv:'78000', recheck:''},
-//	        {date:'9/12/2011', landfill:'GAFFEY', type:'COMPONENT', imeprobe:'GA1109-02', grid:'', repairdesc:'tightened bolts on flange', initialppmv:'700', recheck:'21'},
-//	        {date:'1/7/2014', landfill:'LOPEZ', type:'INSTANTANEOUS', imerobe:'LC1401-01', grid:'5', repairdesc:'ripped watered compacted', initialppmv:'513', recheck:'5'},
-//	        {date:'12/17/2015', landfill:'LOPEZ', type:'INTEGRATED', imeprobe:'LC1512-01', grid:'37', repairdesc:'cleared rotting debris', initialppmv:'50', recheck:'12'}
-//		];
-		
 		$scope.hotspotstatusData = [
 			{imenum:'TC1601-01', grid:'12', foundby:'WA', founddate:'1/1/16', repaired1:'1/3/16', recheckdate1:'1/4/16', passedfail1:'PASSED', repaired2:'', recheckdate2:'', passfail2:'', repaired3:'', recheckdate3:'', passfail3:''},
 			{imenum:'TC1601-02', grid:'12', foundby:'WA', founddate:'1/1/16', repaired1:'1/4/16', recheckdate1:'1/4/16', passedfail1:'FAILED', repaired2:'1/5/16', recheckdate2:'1/6/16', passfail2:'PASSED', repaired3:'', recheckdate3:'', passfail3:''},
@@ -32,9 +24,29 @@ angular.module('reportController', ['ngCookies', 'ngMaterial', 'ngMessages'])
 				});
 		};
 		
-		$scope.getImeData = function(site){
+		$scope.generateReport = function(){
 			
-			var url = 'http://localhost:9091/data/ime';
+			$scope.imeData = [];
+			$scope.iseData = [];
+			
+			if($scope.selectedType == 'Instantaneous')
+			{
+				$scope.getImeData();
+			}else if($scope.selectedType == 'Integrated'){
+				$scope.getIseData();
+			}else{
+				$scope.getImeData();
+				$scope.getIseData();
+			}
+			
+			$scope.currentTime = Date.now();
+			
+		};
+		
+		
+		$scope.getImeData = function(){
+			
+			var url = 'http://localhost:9091/data/exceedance/ime';
 			console.log($scope.selectedSite)
 			if($scope.selectedSite != "")
 				url += "?site=" + $scope.selectedSite;
@@ -44,6 +56,21 @@ angular.module('reportController', ['ngCookies', 'ngMaterial', 'ngMessages'])
 			$http.get(url).
 				success(function(data) {
 					$scope.imeData = data;
+				});
+		};
+		
+		$scope.getIseData = function(site){
+			
+			var url = 'http://localhost:9091/data/exceedance/ise';
+			console.log($scope.selectedSite)
+			if($scope.selectedSite != "")
+				url += "?site=" + $scope.selectedSite;
+			
+			if($scope.selectedType != "")
+				url += "&&type=" + $scope.selectedType;
+			$http.get(url).
+				success(function(data) {
+					$scope.iseData = data;
 				});
 		};
 		
@@ -64,28 +91,18 @@ angular.module('reportController', ['ngCookies', 'ngMaterial', 'ngMessages'])
 
 		};
 		
-		  $scope.myDate = new Date();
-		  $scope.minDate = new Date(
-		      $scope.myDate.getFullYear(),
-		      $scope.myDate.getMonth() - 2,
-		      $scope.myDate.getDate());
-		  $scope.maxDate = new Date(
-		      $scope.myDate.getFullYear(),
-		      $scope.myDate.getMonth() + 2,
-		      $scope.myDate.getDate());
-		  $scope.onlyWeekendsPredicate = function(date) {
-		    var day = date.getDay();
-		    return day === 0 || day === 6;
-		  }
+	  $scope.myDate = new Date();
+	  $scope.minDate = new Date(
+	      $scope.myDate.getFullYear(),
+	      $scope.myDate.getMonth() - 2,
+	      $scope.myDate.getDate());
+	  $scope.maxDate = new Date(
+	      $scope.myDate.getFullYear(),
+	      $scope.myDate.getMonth() + 2,
+	      $scope.myDate.getDate());
+	  $scope.onlyWeekendsPredicate = function(date) {
+	    var day = date.getDay();
+	    return day === 0 || day === 6;
+	  }
 		  
-//		  $scope.searchTerm;
-//	      $scope.clearSearchTerm = function() {
-//	        $scope.searchTerm = '';
-//	      };
-//	      // The md-select directive eats keydown events for some quick select
-//	      // logic. Since we have a search input here, we don't need that logic.
-//	      $element.find('input').on('keydown', function(ev) {
-//	          ev.stopPropagation();
-//	      });
-
 	}]);
