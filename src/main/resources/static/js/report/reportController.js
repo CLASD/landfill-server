@@ -1,6 +1,6 @@
-angular.module('reportController', ['ngCookies'])
+angular.module('reportController', ['ngCookies', 'ngMaterial', 'ngMessages'])
 	.controller('reportController',
-	['$scope' , '$cookies', '$http', function ($scope, $cookies, $http)
+	['$scope' , '$cookies', '$http', function ($scope, $cookies, $http, $element)
 	{
 		
 		
@@ -21,7 +21,9 @@ angular.module('reportController', ['ngCookies'])
 		
 		$scope.years = ['2011', '2012', '2013', '2014', '2015', '2016'];
 		
-		$scope.sites = ['Bishops', 'Gaffey', 'Lopez', 'Sheldon', 'Toyon'];		
+		$scope.sites = ['Bishops', 'Gaffey', 'Lopez', 'Sheldon', 'Toyon'];
+		
+		$scope.types = ['Probes', 'Instantaneous', 'Integrated', 'Leak Check', 'All'];
 		
 		$scope.instantData = function(){
 			$http.get('http://localhost:9091/instantaneous').
@@ -61,21 +63,29 @@ angular.module('reportController', ['ngCookies'])
 			});
 
 		};
-
-	}])
-	.controller('selectTypeController', function($scope, $element) {
-		$scope.types = ['Probes', 'Instantaneous', 'Integrated', 'Leak Check', 'All'];
 		
-	    $scope.searchTerm;
-	    
-	    $scope.clearSearchTerm = function() {
-	    	$scope.searchTerm = '';
-	    };
-	    
-	    // The md-select directive eats keydown events for some quick select
-	    // logic. Since we have a search input here, we don't need that logic.
-	    
-	    $element.find('input').on('keydown', function(ev) {
-	    	ev.stopPropagation();
-	    });
-	});
+		  $scope.myDate = new Date();
+		  $scope.minDate = new Date(
+		      $scope.myDate.getFullYear(),
+		      $scope.myDate.getMonth() - 2,
+		      $scope.myDate.getDate());
+		  $scope.maxDate = new Date(
+		      $scope.myDate.getFullYear(),
+		      $scope.myDate.getMonth() + 2,
+		      $scope.myDate.getDate());
+		  $scope.onlyWeekendsPredicate = function(date) {
+		    var day = date.getDay();
+		    return day === 0 || day === 6;
+		  }
+		  
+//		  $scope.searchTerm;
+//	      $scope.clearSearchTerm = function() {
+//	        $scope.searchTerm = '';
+//	      };
+//	      // The md-select directive eats keydown events for some quick select
+//	      // logic. Since we have a search input here, we don't need that logic.
+//	      $element.find('input').on('keydown', function(ev) {
+//	          ev.stopPropagation();
+//	      });
+
+	}]);
