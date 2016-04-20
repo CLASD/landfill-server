@@ -12,6 +12,7 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="ISE")
@@ -24,6 +25,7 @@ public class Ise {
     @Column(name="ISEPK")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
+	@Type(type="date")
 	private Date readingDate;
 	private String description;
 	private Integer employeePK;

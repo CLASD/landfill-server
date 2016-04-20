@@ -1,5 +1,6 @@
 package org.la.sanitation.landfill.persistence;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class ImeDao<T> {
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Ime> findIme(String site, String employee, String samplingType)
+	public List<Ime> findIme(String site, Date fromDate, Date toDate)
 	{
 		
 		//with the current db design, querying ime table is a pain. Never let a non technical person design anything 
@@ -52,6 +53,15 @@ public class ImeDao<T> {
 			sql += " where s.Name = :site ";
 			
 		}
+		
+		if(fromDate != null && toDate != null)
+		{
+			if(site != null)
+				sql += "and ";
+			else	
+				sql += "where ";
+			sql += " DATE(i.readingDate) BETWEEN :fromDate AND :toDate ";
+		}
 
 		sql+= ";";
 		System.out.println(sql);
@@ -61,6 +71,13 @@ public class ImeDao<T> {
 		{
 			q.setString( "site", site);
 			
+		}
+		
+		if(fromDate != null && toDate != null)
+		{
+			SimpleDateFormat dt1 = new SimpleDateFormat("yyyyy-mm-dd");
+			q.setString("fromDate", dt1.format(fromDate));
+			q.setString("toDate", dt1.format(toDate));
 		}
 		
 		List<Ime> result = q.setResultTransformer(new ResultTransformer() {

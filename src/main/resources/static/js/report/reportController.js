@@ -39,20 +39,35 @@ angular.module('reportController', ['ngCookies', 'ngMaterial', 'ngMessages'])
 				$scope.getIseData();
 			}
 			
-			$scope.currentTime = Date.now();
+			$scope.currentTime = new Date();
 			
 		};
 		
 		
 		$scope.getImeData = function(){
 			
+			console.log($scope.startDate)
+			console.log($scope.endDate)
+			
 			var url = 'http://localhost:9091/data/exceedance/ime';
 			console.log($scope.selectedSite)
 			if($scope.selectedSite != "")
 				url += "?site=" + $scope.selectedSite;
 			
-			if($scope.selectedType != "")
-				url += "&&type=" + $scope.selectedType;
+			if($scope.startDate != undefined){
+				
+				var str = $scope.startDate.toISOString().slice(0, 10);
+				console.log(str);
+				url += "&fromDate=" + str;
+				
+			}
+			
+			if($scope.endDate != undefined){
+				var str = $scope.endDate.toISOString().slice(0, 10);
+				console.log(str);
+				url += "&toDate=" + str;
+			}
+			
 			$http.get(url).
 				success(function(data) {
 					$scope.imeData = data;
@@ -66,8 +81,20 @@ angular.module('reportController', ['ngCookies', 'ngMaterial', 'ngMessages'])
 			if($scope.selectedSite != "")
 				url += "?site=" + $scope.selectedSite;
 			
-			if($scope.selectedType != "")
-				url += "&&type=" + $scope.selectedType;
+			if($scope.startDate != undefined && $scope.startDate != ""){
+				var str = $scope.startDate.toISOString().slice(0, 10);
+				console.log(str);
+				url += "&fromDate=" + str;
+			}
+				
+			
+			if($scope.endDate != undefined && $scope.endDate != ""){
+				var str = $scope.endDate.toISOString().slice(0, 10);
+				console.log(str);
+				url += "&toDate=" + str;
+			}
+				
+			
 			$http.get(url).
 				success(function(data) {
 					$scope.iseData = data;

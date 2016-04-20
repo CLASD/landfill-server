@@ -1,5 +1,6 @@
 package org.la.sanitation.landfill.persistence;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class IseDao {
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Ise> findIse(String site, String employee, String samplingType)
+	public List<Ise> findIse(String site, Date fromDate, Date toDate)
 	{
 		
 		String sql = "select i.*, sp.PointType, s.Name from ISE i "
@@ -36,6 +37,15 @@ public class IseDao {
 			
 		}
 		
+		if(fromDate != null && toDate != null)
+		{
+			if(site != null)
+				sql += "and ";
+			else	
+				sql += "where ";
+			sql += " DATE(i.readingDate) BETWEEN :fromDate AND :toDate ";
+		}
+		
 		sql+= ";";
 		System.out.println(sql);
 		SQLQuery q = sessionFactory.getCurrentSession().createSQLQuery(sql);
@@ -44,6 +54,13 @@ public class IseDao {
 		{
 			q.setString( "site", site);
 			
+		}
+		
+		if(fromDate != null && toDate != null)
+		{
+			SimpleDateFormat dt1 = new SimpleDateFormat("yyyyy-mm-dd");
+			q.setString("fromDate", dt1.format(fromDate));
+			q.setString("toDate", dt1.format(toDate));
 		}
 		
 		List<Ise> result = q.setResultTransformer(new ResultTransformer() {

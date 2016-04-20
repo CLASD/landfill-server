@@ -66,41 +66,29 @@ public class ReportController {
     @RequestMapping(value="/exceedance/ime", produces={"application/json"}, method= RequestMethod.GET)
     public @ResponseBody List<Ime> getImeData(
             @RequestParam(value = "site", required = false) String site,
-            @RequestParam(value = "type", required = false) String type,
-            @RequestParam(value= "fromDate",required = false ) @DateTimeFormat(pattern = "MMddyyyy") Date fromDate,
-            @RequestParam(value= "toDate",required = false ) @DateTimeFormat(pattern = "MMddyyyy") Date toDate)
+            @RequestParam(value= "fromDate",required = false ) @DateTimeFormat(pattern = "yyyy-mm-dd") Date fromDate,
+            @RequestParam(value= "toDate",required = false ) @DateTimeFormat(pattern = "yyyy-mm-dd") Date toDate)
     {
     	System.out.println("site " + site );
-    	System.out.println("type " + type );
     	
     	if(site != null && site.equalsIgnoreCase("undefined"))
     		site = null;
-    	
-    	if(type !=null && (type.equalsIgnoreCase("undefined") || type.equalsIgnoreCase("all") ) )
-    		type = null;
-    	
-    	return imeDao.findIme(site, null, type);
+
+    	return imeDao.findIme(site, fromDate, toDate);
     }
     
     @RequestMapping(value="/exceedance/ise", produces={"application/json"}, method= RequestMethod.GET)
     public @ResponseBody List<Ise> getIseData(
             @RequestParam(value = "site", required = false) String site,
-            @RequestParam(value = "type", required = false) String type,
-            @RequestParam(value= "fromDate",required = false ) @DateTimeFormat(pattern = "MMddyyyy") Date fromDate,
-            @RequestParam(value= "toDate",required = false ) @DateTimeFormat(pattern = "MMddyyyy") Date toDate)
+            @RequestParam(value= "fromDate",required = false ) @DateTimeFormat(pattern = "yyyy-mm-dd") Date fromDate,
+            @RequestParam(value= "toDate",required = false ) @DateTimeFormat(pattern = "yyyy-mm-dd") Date toDate)
     {
     	System.out.println("site " + site );
-    	System.out.println("type " + type );
     	
     	if(site != null && site.equalsIgnoreCase("undefined"))
     		site = null;
     	
-    	if(type !=null && (type.equalsIgnoreCase("undefined") || type.equalsIgnoreCase("all") ) )
-    	{
-    		type = null;
-    	}
-    	
-    	return iseDao.findIse(site, null, type);
+    	return iseDao.findIse(site, fromDate, toDate);
     }
     
 }

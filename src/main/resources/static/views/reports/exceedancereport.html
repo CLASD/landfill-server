@@ -55,13 +55,12 @@
     </thead>
     <tbody>
       <tr ng-repeat="data in imeData">
-        <td>{{data.readingDate}}</td>
+        <td>{{data.readingDate | date:'MM/dd/yyyy'}}</td>
 		<td>{{data.imeNumber}}</td>
         <td>{{data.grid}}</td>
 		<td>{{data.description}}</td>
         <td>{{data.value}}</td>
 		<td>{{data.recheck}}</td>
-		<td></td>
 		<td></td>
       </tr>
     </tbody>
@@ -88,13 +87,12 @@
     </thead>
     <tbody>
       <tr ng-repeat="data in iseData">
-        <td>{{data.readingDate}}</td>
+        <td>{{data.readingDate | date:'MM/dd/yyyy'}}}</td>
 		<td>{{data.imeNumber}}</td>
         <td>{{data.grid}}</td>
 		<td>{{data.description}}</td>
         <td>{{data.value}}</td>
 		<td>{{data.recheck}}</td>
-		<td></td>
 		<td></td>
       </tr>
     </tbody>
@@ -102,7 +100,7 @@
   
   </div>
     <div class="row">
-		Reports Generated on {{currentTime}}
+		Reports Generated on {{currentTime }}
 	</div>
   
   
