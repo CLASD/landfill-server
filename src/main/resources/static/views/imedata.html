@@ -1,0 +1,66 @@
+<center>
+	<form>
+		<label>IME Number: </label>
+		<input type="text" name="" value="">
+		<input type="submit" value="Search">
+	</form>
+</center>
+
+<!-- Hide report unless generated -->
+<div>
+	<div class="text-center">
+		<h3>Solid Resources Processing & Construction Division</h2>
+		<h4>Environmental Compliance Inspection Office</h4>
+		<h4>For Readings Greater than 500 ppm/v</h4>
+		
+		<h4>XXXXXXX Landfill</h4>
+	</div>
+	
+	<h4 class="pull-left">Record Number: IME XX1201-01</h4>
+	<h4 class="pull-right">Grid ID(s): 66, 67</h4>
+	
+	<table class="table table-bordered table-striped text-center">
+		<thead>
+			<tr>
+				<th class="text-center" colspan="6">INSPECTION REPORT</th>
+				<th class="text-center" colspan="6">REPAIR REPORT</th>
+			</tr>
+			<tr>
+				<th class="text-center" rowspan="2">DATE</th>
+				<th class="text-center" rowspan="2">TIME</th>
+				<th class="text-center" rowspan="2">DESCRIPTION</th>
+				<th class="text-center" rowspan="2">Spot, Line, Area</th>
+				<th class="text-center" rowspan="2">INSPECTOR</th>
+				<th class="text-center" rowspan="2">VALUE (ppm/v)</th>
+				<th class="text-center" colspan="4">DESCRIPTION OF REPAIR</th>
+				<th class="text-center" colspan="2">COMPLETION</th>
+			</tr>
+			<tr>
+				<th class="text-center">SOIL</th>
+				<th class="text-center">WATER</th>
+				<th class="text-center">OTHER</th>
+				<th class="text-center">CREW</th>
+				<th class="text-center">DATE</th>
+				<th class="text-center">TIME</th>
+			</tr>
+		</thead>
+		<tbody ng-repeat="inspection in inspections">
+			<tr ng-repeat="repair in inspection.repairs">
+				<td>{{inspection.date}}</td>
+				<td>{{inspection.time}}</td>
+				<td>{{inspection.description}}</td>
+				<td>{{inspection.type}}</td>
+				<td>{{inspection.inspector}}</td>
+				<td>{{inspection.value}}</td>
+				<td>{{repair.soil}}</td>
+				<td>{{repair.water}}</td>
+				<td>{{repair.other}}</td>
+				<td>{{repair.crew}}</td>
+				<td>{{repair.date}}</td>
+				<td>{{repair.time}}</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<p>Run Date, Time: {{currentTime}}</p>
+</div>
