@@ -46,6 +46,10 @@ angular.module('app', ['ngRoute', 'ngResource',
 //          }
 
         })
+        .when('/ime-data', {
+          templateUrl: 'views/imedata.html',
+          controller: 'reportController'
+        })
         .when('/exceedance-report', {
           templateUrl: 'views/reports/exceedancereport.html',
           controller: 'reportController'

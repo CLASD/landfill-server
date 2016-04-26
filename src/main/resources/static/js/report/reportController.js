@@ -9,6 +9,9 @@ angular.module('reportController', ['ngCookies', 'ngMaterial', 'ngMessages'])
 			{imenum:'TC1601-03', grid:'13', foundby:'JS', founddate:'1/2/16', repaired1:'1/3/16', recheckdate1:'1/5/16', passedfail1:'PASSED', repaired2:'1/7/16', recheckdate2:'1/8/16', passfail2:'FAILED', repaired3:'1/9/16', recheckdate3:'1/9/16', passfail3:'PASSED'}
         ];
 		
+		/* Start of Dummy Data */
+		
+		// Hotspot Status
 		$scope.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 		
 		$scope.years = ['2011', '2012', '2013', '2014', '2015', '2016'];
@@ -16,6 +19,25 @@ angular.module('reportController', ['ngCookies', 'ngMaterial', 'ngMessages'])
 		$scope.sites = ['Bishops', 'Gaffey', 'Lopez', 'Sheldon', 'Toyon'];
 		
 		$scope.types = ['Probes', 'Instantaneous', 'Integrated', 'Leak Check', 'All'];
+		
+		// IME Data
+		$scope.inspections = [
+		    {date:'1/2/2012', time:'0715', description:'Crack across bench and down slope.', type:'Line', inspector:'William Andrews', value:'50,000', 
+		    	repairs: [{soil:'X', water:'X', other:'Ripped, watered, walked with D8 dozer.', crew:'Gas Crew', date:'1/8/2012', time:'1100'},
+		    	          {soil:'X', water:'X', other:'Extended repaired area.', crew:'Ed & Doug', date:'1/9/2012', time:'1500'}]},
+		    {date:'1/10/2012', time:'0730', description:'Now only around base of well 6ABHW02.', type:'Spot', inspector:'Brijesh Misra', value:'750', 
+		    	repairs: [{soil:'', water:'X', other:'Hand tamped around well.', crew:'John & Bob', date:'1/11/2012', time:'1400'}]},
+		    {date:'1/13/2012', time:'0900', description:'PASSED', type:'', inspector:'John Salas', value:'12.5',
+		    	repairs: [{}]},
+        ];
+		
+//		$scope.repairs = [
+//  		    {soil:'X', water:'X', other:'Ripped, watered, walked with D8 dozer.', crew:'Gas Crew', date:'1/8/2012', time:'1100'},
+//	  		{soil:'X', water:'X', other:'Extended repaired area.', crew:'Ed & Doug', date:'1/9/2012', time:'1500'},
+//	  		{soil:'', water:'X', other:'Hand thamped around well.', crew:'John & Bob', date:'1/11/2012', time:'1400'},
+//        ];
+		
+		/* End of Dummy Data */
 		
 		$scope.instantData = function(){
 			$http.get('http://localhost:9091/instantaneous').

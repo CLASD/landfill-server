@@ -1,54 +1,52 @@
-  <h3 align="center">Hot-Spot Monthly Tracking Sheet</h3>
-  <a href="" ><span class="pull-right glyphicon glyphicon-download-alt"></span></a>
-  <a href="" ><span class="pull-right glyphicon glyphicon-share"></span></a>
-  <a href="" ><span class="pull-right glyphicon glyphicon-search"></span></a>
-  <h3 align="center">MONTH OF 
-	  <select name="month">
-		  <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
-	  </select>
-	  <select name="year">
-		  <option ng-repeat="year in years" value="{{year}}">{{year}}</option>
-	  </select>
-	   for the 
-	  <select name="site">
-		  <option ng-repeat="site in sites" value="{{site}}">{{site}}</option>
-	  </select>
-	  Landfill
-	  <button type="button" class="btn btn-success" ng-click="">Generate</button> 
-  </h3>
-  <table class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        <th>IME #</th>
-        <th>GRID(s)</th>
-        <th>FOUND BY</th>
-		<th>FOUND ON</th>
-		<th>Repaired?</th>
-		<th>Recheck Date</th>
-		<th>Pass / Fail</th>
-		<th>Repaired?</th>
-		<th>Recheck Date</th>
-		<th>Pass / Fail</th>
-		<th>Repaired?</th>
-		<th>Recheck Date</th>
-		<th>Pass / Fail</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="data in hotspotstatusData">
-		<td>{{data.imenum}}</td>
-		<td>{{data.grid}}</td>
-		<td>{{data.foundby}}</td>
-		<td>{{data.founddate}}</td>
-		<td>{{data.repaired1}}</td>
-		<td>{{data.recheckdate1}}</td>
-		<td>{{data.passedfail1}}</td>
-		<td>{{data.repaired2}}</td>
-		<td>{{data.recheckdate2}}</td>
-		<td>{{data.passedfail2}}</td>
-		<td>{{data.repaired3}}</td>
-		<td>{{data.recheckdate3}}</td>
-		<td>{{data.passedfail3}}</td>
-      </tr>
-    </tbody>
-  </table>
+<h3 align="center">Hot-Spot Monthly Tracking Sheet</h3>
+<a href=""><span class="pull-right glyphicon glyphicon-download-alt"></span></a>
+<a href=""><span class="pull-right glyphicon glyphicon-share"></span></a>
+<a href=""><span class="pull-right glyphicon glyphicon-search"></span></a>
+<h3 align="center">
+	MONTH OF <select name="month">
+		<option ng-repeat="month in months" value="{{month}}">{{month}}</option>
+	</select> <select name="year">
+		<option ng-repeat="year in years" value="{{year}}">{{year}}</option>
+	</select> for the <select name="site">
+		<option ng-repeat="site in sites" value="{{site}}">{{site}}</option>
+	</select> Landfill
+	<button type="button" class="btn btn-success" ng-click="">Generate</button>
+</h3>
+<div ng-show="">
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>IME #</th>
+				<th>GRID(s)</th>
+				<th>FOUND BY</th>
+				<th>FOUND ON</th>
+				<th>Repaired?</th>
+				<th>Recheck Date</th>
+				<th>Pass / Fail</th>
+				<th>Repaired?</th>
+				<th>Recheck Date</th>
+				<th>Pass / Fail</th>
+				<th>Repaired?</th>
+				<th>Recheck Date</th>
+				<th>Pass / Fail</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="data in hotspotstatusData">
+				<td>{{data.imenum}}</td>
+				<td>{{data.grid}}</td>
+				<td>{{data.foundby}}</td>
+				<td>{{data.founddate}}</td>
+				<td>{{data.repaired1}}</td>
+				<td>{{data.recheckdate1}}</td>
+				<td>{{data.passedfail1}}</td>
+				<td>{{data.repaired2}}</td>
+				<td>{{data.recheckdate2}}</td>
+				<td>{{data.passedfail2}}</td>
+				<td>{{data.repaired3}}</td>
+				<td>{{data.recheckdate3}}</td>
+				<td>{{data.passedfail3}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
