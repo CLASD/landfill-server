@@ -31,6 +31,14 @@ angular.module('reportController', ['ngCookies', 'ngMaterial', 'ngMessages'])
 		    	repairs: [{}]},
         ];
 		
+		$scope.hoverIn = function() {
+			this.hoverOptions = true;
+		}
+		
+		$scope.hoverOut = function() {
+			this.hoverOptions = false;
+		}
+		
 //		$scope.repairs = [
 //  		    {soil:'X', water:'X', other:'Ripped, watered, walked with D8 dozer.', crew:'Gas Crew', date:'1/8/2012', time:'1100'},
 //	  		{soil:'X', water:'X', other:'Extended repaired area.', crew:'Ed & Doug', date:'1/9/2012', time:'1500'},

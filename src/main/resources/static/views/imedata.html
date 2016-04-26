@@ -1,8 +1,10 @@
 <center>
-	<form>
-		<label>IME Number: </label>
-		<input type="text" name="" value="">
-		<input type="submit" value="Search">
+	<form class="form-inline">
+		<div class="form-group">
+			<label>IME Number: </label>
+			<input type="text" class="form-control">
+			<button type="submit" class="btn btn-success">Search</button>
+		</div>
 	</form>
 </center>
 
@@ -24,6 +26,9 @@
 			<tr>
 				<th class="text-center" colspan="6">INSPECTION REPORT</th>
 				<th class="text-center" colspan="6">REPAIR REPORT</th>
+				<span ng-show="hoverOptions" class="animate-show">
+					<th class="text-center" rowspan="3">OPTIONS</th>
+				</span>
 			</tr>
 			<tr>
 				<th class="text-center" rowspan="2">DATE</th>
@@ -58,6 +63,13 @@
 				<td>{{repair.crew}}</td>
 				<td>{{repair.date}}</td>
 				<td>{{repair.time}}</td>
+				<span ng-show="hoverOptions" class="animate-show">
+					<td>
+						<a href="/"><span class="glyphicon glyphicon-pencil">Row</span></a>
+						</br></br>
+						<a href="/"><span class="glyphicon glyphicon-plus">Repair</span></a>
+					</td>
+				</span>
 			</tr>
 		</tbody>
 	</table>
