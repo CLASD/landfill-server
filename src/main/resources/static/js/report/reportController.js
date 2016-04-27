@@ -31,6 +31,7 @@ angular.module('reportController', ['ngCookies', 'ngMaterial', 'ngMessages'])
 		    	repairs: [{}]},
         ];
 		
+		
 		$scope.clickDisplay = true;
 		$scope.clickEdit = false;
 		$scope.showRepair = false;
@@ -49,13 +50,10 @@ angular.module('reportController', ['ngCookies', 'ngMaterial', 'ngMessages'])
 			this.showRepair = true;
 		}
 		
-//		$scope.repairs = [
-//  		    {soil:'X', water:'X', other:'Ripped, watered, walked with D8 dozer.', crew:'Gas Crew', date:'1/8/2012', time:'1100'},
-//	  		{soil:'X', water:'X', other:'Extended repaired area.', crew:'Ed & Doug', date:'1/9/2012', time:'1500'},
-//	  		{soil:'', water:'X', other:'Hand thamped around well.', crew:'John & Bob', date:'1/11/2012', time:'1400'},
-//        ];
-		
-		/* End of Dummy Data */
+		$scope.addRepair = function(){
+			this.clickEdit = true;
+			this.clickDisplay = false;
+		}
 		
 		$scope.instantData = function(){
 			$http.get('http://localhost:9091/instantaneous').
@@ -141,6 +139,20 @@ angular.module('reportController', ['ngCookies', 'ngMaterial', 'ngMessages'])
 				});
 		};
 		
+		$scope.getIme = function(){
+			
+			console.log($scope.searchImeNumber)
+			var url = 'http://localhost:9091/data/exceedance/ime/';
+			
+			if($scope.searchImeNumber != "")
+				url += $scope.searchImeNumber;	
+			
+			$http.get(url).
+				success(function(data) {
+					$scope.ime = data;
+				});
+		};
+		
 		$scope.sendEmail = function(messageType) {
 
 //			searchService.query({
@@ -157,6 +169,8 @@ angular.module('reportController', ['ngCookies', 'ngMaterial', 'ngMessages'])
 			});
 
 		};
+		
+		
 		
 	  $scope.myDate = new Date();
 	  $scope.minDate = new Date(

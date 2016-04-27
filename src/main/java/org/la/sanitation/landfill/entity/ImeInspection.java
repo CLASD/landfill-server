@@ -15,29 +15,35 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
-@Table(name="ImeRepair")
+@Table(name="ImeInspection")
 @DynamicUpdate
 @SelectBeforeUpdate
 public class ImeInspection {
 	
 	@Id
-    @Column(name="ImeInspectionPK")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer imeInspectionPK;
 	private Date inspectionDate;
 	private String description;
 	private String imeShape;
-	@OneToOne( fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+	@OneToOne( fetch = FetchType.EAGER)
+	@JoinColumn( name="EmployeePK") 
 	private Employee employee;
 	private String value;
-	private Ime ime;
-	@OneToMany( mappedBy="imeInspection" , fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+	@Transient
+	private ImeRepair repair;
+
+	//@OneToMany( mappedBy= "imeInspection", fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+	@OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval=true )
+	@JoinColumn( name = "IMEInspectionPK")
 	private List<ImeRepair> imeRepairs;
+	
 	public Integer getImeInspectionPK() {
 		return imeInspectionPK;
 	}
@@ -74,17 +80,19 @@ public class ImeInspection {
 	public void setValue(String value) {
 		this.value = value;
 	}
-	public Ime getIme() {
-		return ime;
-	}
-	public void setIme(Ime ime) {
-		this.ime = ime;
-	}
+
 	public List<ImeRepair> getImeRepairs() {
 		return imeRepairs;
 	}
 	public void setImeRepairs(List<ImeRepair> imeRepairs) {
 		this.imeRepairs = imeRepairs;
+	}
+	
+	public ImeRepair getRepair() {
+		return repair;
+	}
+	public void setRepair(ImeRepair repair) {
+		this.repair = repair;
 	}
 
 }

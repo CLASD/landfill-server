@@ -1,24 +1,24 @@
 <center>
-	<form class="form-inline">
+	<form class="form-inline" ng-submit="getIme()">
 		<div class="form-group">
 			<label>IME Number: </label>
-			<input type="text" class="form-control">
-			<button type="submit" class="btn btn-success">Search</button>
+			<input type="text" ng-model="searchImeNumber" class="form-control">
+			<button type="submit" value="submit" class="btn btn-success">Search</button>
 		</div>
 	</form>
 </center>
 
 <!-- Hide report unless generated -->
-<div>
+<div ng-show="ime != null">
 	<div class="text-center">
 		<h3>Solid Resources Processing & Construction Division</h2>
 		<h4>Environmental Compliance Inspection Office</h4>
 		<h4>For Readings Greater than 500 ppm/v</h4>
 		
-		<h4>XXXXXXX Landfill</h4>
+		<h4>Gaffey Landfill</h4>
 	</div>
 	
-	<h4 class="pull-left">Record Number: IME XX1201-01</h4>
+	<h4 class="pull-left">Record Number: IME {{ime.imeNumber}}</h4>
 	<h4 class="pull-right">Grid ID(s): 66, 67</h4>
 	
 	<table class="table table-bordered table-striped text-center">
@@ -26,6 +26,7 @@
 			<tr>
 				<th class="text-center" colspan="6">INSPECTION REPORT</th>
 				<th class="text-center" colspan="6">REPAIR REPORT</th>
+				<th class="text-center" colspan="1">ACTION</th>
 			</tr>
 			<tr>
 				<th class="text-center" rowspan="2">DATE</th>
@@ -46,32 +47,54 @@
 				<th class="text-center">TIME</th>
 			</tr>
 		</thead>
-		<tbody ng-repeat="inspection in inspections">
-			<tr ng-repeat="repair in inspection.repairs">
-				<td ng-show="clickDisplay">{{inspection.date}}</td>
-				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{inspection.date}}"></td>
-				<td ng-show="clickDisplay">{{inspection.time}}</td>
-				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{inspection.time}}"></td>
-				<td ng-show="clickDisplay">{{inspection.description}}</td>
+		<tbody >
+			<!--  <tr ng-repeat="repair in inspection.repairs">-->
+			<tr ng-repeat="inspection in ime.imeInspections">
+				<!-- <td ng-show="clickDisplay">{{inspection.inspectionDate}}</td> -->
+				<!-- <td ng-show="clickEdit"><input type="text" class="form-control" value="{{inspection.date}}"></td> -->
+				<!-- <td ng-show="clickDisplay">{{inspection.time}}</td> -->
+				<!-- <td ng-show="clickEdit"><input type="text" class="form-control" value="{{inspection.time}}"></td> -->
+				<!-- <td ng-show="clickDisplay">{{inspection.description}}</td>
 				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{inspection.description}}"></td>
-				<td ng-show="clickDisplay">{{inspection.type}}</td>
-				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{inspection.type}}"></td>
-				<td ng-show="clickDisplay">{{inspection.inspector}}</td>
+				<td ng-show="clickDisplay">{{inspection.imeShape}}</td> -->
+				<!-- <td ng-show="clickEdit"><input type="text" class="form-control" value="{{inspection.type}}"></td> -->
+				<!-- <td ng-show="clickDisplay">{{inspection.employee.firstname}} {{inspection.employee.lastname}}</td>
 				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{inspection.inspector}}"></td>
 				<td ng-show="clickDisplay">{{inspection.value}}</td>
-				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{inspection.value}}"></td>
-				<td ng-show="clickDisplay">{{repair.soil}}</td>
-				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{repair.soil}}"></td>
-				<td ng-show="clickDisplay">{{repair.water}}</td>
-				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{repair.water}}"></td>
-				<td ng-show="clickDisplay">{{repair.other}}</td>
-				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{repair.other}}"></td>
-				<td ng-show="clickDisplay">{{repair.crew}}</td>
-				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{repair.crew}}"></td>
-				<td ng-show="clickDisplay">{{repair.date}}</td>
-				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{repair.date}}"></td>
-				<td ng-show="clickDisplay">{{repair.time}}</td>
-				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{repair.time}}"></td>
+				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{inspection.value}}"></td> -->
+				
+				<td>{{inspection.inspectionDate}}</td>
+				<td>{{inspection.time}}</td>
+				<td>{{inspection.description}}</td>
+				<td>{{inspection.imeShape}}</td>
+				<td>{{inspection.employee.firstname}} {{inspection.employee.lastname}}</td>
+				<td>{{inspection.value}}</td>
+				
+				<td ng-show="clickDisplay">{{inspection.repair.soil}}</td>
+				<td ng-show="clickEdit">
+					<div class="checkbox">
+  						<label>
+    					<input type="checkbox" value="{{inspection.repair.soil}}">
+  						</label>
+					</div>
+				</td>
+				<td ng-show="clickDisplay">
+					<div class="checkbox">
+  						<label>
+    					<input type="checkbox" value="{{inspection.repair.water}}">
+  						</label>
+					</div>
+				</td>
+				<td ng-show="clickEdit"><label><input type="text" class="form-control" value="{{inspection.repair.water}}"></label></td>
+				<td ng-show="clickDisplay">{{inspection.repair.description}}</td>
+				<td ng-show="clickEdit"><label><input type="text" class="form-control" value="{{inspection.repair.description}}"></label></td>
+				<td ng-show="clickDisplay">{{inspection.repair.crew}}</td>
+				<td ng-show="clickEdit"><label><input type="text" class="form-control" value="{{inspection.repair.crew}}"></label></td>
+				<td ng-show="clickDisplay">{{inspection.repair.datetime}}</td>
+				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{inspection.repair.datetime}}"></td>
+				<td ng-show="clickDisplay">{{inspection.repair.time}}</td>
+				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{inspection.repair.time}}"></td>
+				<td ><a href="" ng-click="addRepair()"><span class="glyphicon glyphicon-pencil"></span></a></td>
 			</tr>
 		</tbody>
 	</table>

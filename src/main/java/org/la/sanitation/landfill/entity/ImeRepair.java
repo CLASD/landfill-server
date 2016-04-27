@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -25,18 +26,20 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 public class ImeRepair {
 	
 	@Id
-    @Column(name="ImeRepairPK")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer imeRepairPK;
 	private String type;
 	private String description;
 	private String crew;
 	private Date dateTime;
-	private Employee enteringEmployee;
-	@ManyToOne(  fetch = FetchType.LAZY )
-    @JoinColumn( name = "IMEInspectionPK" )
-	private ImeInspection imeInspection;
 	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="enteringEmployee", referencedColumnName="EmployeePK")
+	private Employee enteringEmployee;
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="IMEInspectionPK")
+	private ImeInspection imeInspection;
+
 	public Integer getImeRepairPK() {
 		return imeRepairPK;
 	}
@@ -75,11 +78,5 @@ public class ImeRepair {
 		this.enteringEmployee = enteringEmployee;
 	}
 
-	public ImeInspection getImeInspection() {
-		return imeInspection;
-	}
-	public void setImeInspection(ImeInspection imeInspection) {
-		this.imeInspection = imeInspection;
-	}
-	
+
 }

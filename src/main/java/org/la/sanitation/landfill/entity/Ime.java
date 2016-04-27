@@ -40,9 +40,16 @@ public class Ime {
 	@Transient 
 	private String siteName;
 	
-	@OneToMany( mappedBy="ime" , fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+	@OneToMany(  fetch = FetchType.EAGER, cascade = CascadeType.ALL )
+	@JoinColumn( name="IMEPK") 
 	private List<ImeInspection> imeInspections; 
 	
+	public List<ImeInspection> getImeInspections() {
+		return imeInspections;
+	}
+	public void setImeInspections(List<ImeInspection> imeInspections) {
+		this.imeInspections = imeInspections;
+	}
 	public Integer getId() {
 		return id;
 	}

@@ -13,6 +13,7 @@ import org.hibernate.transform.ResultTransformer;
 import org.hibernate.type.IntegerType;
 import org.hibernate.type.StringType;
 import org.la.sanitation.landfill.entity.Ime;
+import org.la.sanitation.landfill.entity.ImeInspection;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -111,10 +112,20 @@ public class ImeDao<T> {
 	@Transactional
 	public Ime findByImeNumber(String imeNumber) {
 		
-		Query q = sessionFactory.getCurrentSession().createQuery("from IME where ImeNumber = :imeNumber ");
-		return (Ime) q.uniqueResult();
-	}
-	
+		Query q = sessionFactory.getCurrentSession().createQuery("from Ime where ImeNumber = :imeNumber ");
+		q.setString("imeNumber", imeNumber);
+		Ime ime = (Ime) q.uniqueResult();
+
+		for(ImeInspection in : ime.getImeInspections())
+		{
+			if(in.getImeRepairs() != null && !in.getImeRepairs().isEmpty())
+			{
+				in.setRepair(in.getImeRepairs().get(0));
+			}
+		}
 		
+		
+		return ime;
+	}
 
 }
