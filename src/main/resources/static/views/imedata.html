@@ -48,30 +48,30 @@
 		</thead>
 		<tbody ng-repeat="inspection in inspections">
 			<tr ng-repeat="repair in inspection.repairs">
-				<td ng-show="hoverDisplay">{{inspection.date}}</td>
-				<td ng-show="hoverEdit"><input type="text" class="form-control" value="{{inspection.date}}"></td>
-				<td ng-show="hoverDisplay">{{inspection.time}}</td>
-				<td ng-show="hoverEdit"><input type="text" class="form-control" value="{{inspection.time}}"></td>
-				<td ng-show="hoverDisplay">{{inspection.description}}</td>
-				<td ng-show="hoverEdit"><input type="text" class="form-control" value="{{inspection.description}}"></td>
-				<td ng-show="hoverDisplay">{{inspection.type}}</td>
-				<td ng-show="hoverEdit"><input type="text" class="form-control" value="{{inspection.type}}"></td>
-				<td ng-show="hoverDisplay">{{inspection.inspector}}</td>
-				<td ng-show="hoverEdit"><input type="text" class="form-control" value="{{inspection.inspector}}"></td>
-				<td ng-show="hoverDisplay">{{inspection.value}}</td>
-				<td ng-show="hoverEdit"><input type="text" class="form-control" value="{{inspection.value}}"></td>
-				<td ng-show="hoverDisplay">{{repair.soil}}</td>
-				<td ng-show="hoverEdit"><input type="text" class="form-control" value="{{repair.soil}}"></td>
-				<td ng-show="hoverDisplay">{{repair.water}}</td>
-				<td ng-show="hoverEdit"><input type="text" class="form-control" value="{{repair.water}}"></td>
-				<td ng-show="hoverDisplay">{{repair.other}}</td>
-				<td ng-show="hoverEdit"><input type="text" class="form-control" value="{{repair.other}}"></td>
-				<td ng-show="hoverDisplay">{{repair.crew}}</td>
-				<td ng-show="hoverEdit"><input type="text" class="form-control" value="{{repair.crew}}"></td>
-				<td ng-show="hoverDisplay">{{repair.date}}</td>
-				<td ng-show="hoverEdit"><input type="text" class="form-control" value="{{repair.date}}"></td>
-				<td ng-show="hoverDisplay">{{repair.time}}</td>
-				<td ng-show="hoverEdit"><input type="text" class="form-control" value="{{repair.time}}"></td>
+				<td ng-show="clickDisplay">{{inspection.date}}</td>
+				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{inspection.date}}"></td>
+				<td ng-show="clickDisplay">{{inspection.time}}</td>
+				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{inspection.time}}"></td>
+				<td ng-show="clickDisplay">{{inspection.description}}</td>
+				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{inspection.description}}"></td>
+				<td ng-show="clickDisplay">{{inspection.type}}</td>
+				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{inspection.type}}"></td>
+				<td ng-show="clickDisplay">{{inspection.inspector}}</td>
+				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{inspection.inspector}}"></td>
+				<td ng-show="clickDisplay">{{inspection.value}}</td>
+				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{inspection.value}}"></td>
+				<td ng-show="clickDisplay">{{repair.soil}}</td>
+				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{repair.soil}}"></td>
+				<td ng-show="clickDisplay">{{repair.water}}</td>
+				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{repair.water}}"></td>
+				<td ng-show="clickDisplay">{{repair.other}}</td>
+				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{repair.other}}"></td>
+				<td ng-show="clickDisplay">{{repair.crew}}</td>
+				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{repair.crew}}"></td>
+				<td ng-show="clickDisplay">{{repair.date}}</td>
+				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{repair.date}}"></td>
+				<td ng-show="clickDisplay">{{repair.time}}</td>
+				<td ng-show="clickEdit"><input type="text" class="form-control" value="{{repair.time}}"></td>
 			</tr>
 		</tbody>
 	</table>
@@ -79,8 +79,44 @@
 	<p>Run Date, Time: {{currentTime}}</p>
 	
 	<p class="pull-right">
-		<a href="" ng-click="hoverIn()"><span class="glyphicon glyphicon-pencil"></span> Edit Report</a></br>
-		<a href="" ng-click="hoverOut()"><span class="glyphicon glyphicon-floppy-disk"></span> Save Report</a></br>
-		<a href=""><span class="glyphicon glyphicon-plus-sign"></span> Add Repair</a></br>
+		<a href="" ng-click="showReport()"><span class="glyphicon glyphicon-pencil"></span> Edit Report</a></br>
+		<a href="" ng-click="hideReport()"><span class="glyphicon glyphicon-floppy-disk"></span> Save Report</a></br>
+		<a href="" ng-click="showAddRepair()"><span class="glyphicon glyphicon-plus-sign"></span> Add Repair</a></br>
 	</p>
+	
+	<div ng-show="showRepair" align="center">
+		<form class="form-inline">
+			<table>
+				<div class="form-group">
+					<tr>
+						<td><label>Soil: </label></td>
+						<td><input type="text" class="form-control"></td>
+					</tr>
+					<tr>
+						<td><label>Water: </label></td>
+						<td><input type="text" class="form-control"></td>
+					</tr>
+					<tr>
+						<td><label>Other: </label></td>
+						<td><input type="text" class="form-control"></td>
+					</tr>
+					<tr>
+						<td><label>Crew: </label></td>
+						<td><input type="text" class="form-control"></td>
+					</tr>
+					<tr>
+						<td><label>Date: </label></td>
+						<td><input type="text" class="form-control"></td>
+					</tr>
+					<tr>
+						<td><label>Time: </label></td>
+						<td><input type="text" class="form-control"></td>
+					</tr>
+					<tr>
+						<td colspan="2"><button type="submit" class="btn btn-success">Add</button></td>
+					</tr>
+				</div>
+			</table>
+		</form>
+	</div>
 </div>
