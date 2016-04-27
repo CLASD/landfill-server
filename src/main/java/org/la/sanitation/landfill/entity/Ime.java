@@ -1,12 +1,17 @@
 package org.la.sanitation.landfill.entity;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -23,7 +28,7 @@ public class Ime {
 	@Id
     @Column(name="IMEPK")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 	@Type(type="date")
 	private Date readingDate;
 	private String description;
@@ -35,10 +40,13 @@ public class Ime {
 	@Transient 
 	private String siteName;
 	
-	public int getId() {
+	@OneToMany( mappedBy="ime" , fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+	private List<ImeInspection> imeInspections; 
+	
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public Date getReadingDate() {

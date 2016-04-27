@@ -13,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,7 +31,7 @@ import java.util.Map;
  * Created by susansun on 3/24/16.
  */
 @Controller
-@RequestMapping(value="/data")
+@RequestMapping(value="/data", produces={"application/json"})
 public class ReportController {
 
     @Resource
@@ -71,11 +72,41 @@ public class ReportController {
     {
     	System.out.println("site " + site );
     	
-    	if(site != null && site.equalsIgnoreCase("undefined"))
+    	if(site != null && (site.equalsIgnoreCase("undefined") || site.equalsIgnoreCase("all")))
     		site = null;
 
     	return imeDao.findIme(site, fromDate, toDate);
     }
+    
+    @RequestMapping(value="/exceedance/ime/{imeNumber}", method= RequestMethod.GET)
+    public @ResponseBody Ime getIme( @PathVariable String imeNumber,
+            @RequestParam(value = "site", required = false) String site)
+    {
+    	System.out.println("find ime by ime number: " + imeNumber );
+    	
+    	if(site != null && (site.equalsIgnoreCase("undefined") || site.equalsIgnoreCase("all")))
+    		site = null;
+
+    	return imeDao.findByImeNumber(imeNumber);
+    }
+    
+    @RequestMapping(value="/exceedance/ime/{imepk}", consumes ={"application/json"}, produces={"application/json"}, method= RequestMethod.PUT)
+    public @ResponseBody List<Ime> updateIme(@RequestBody Ime ime)
+    {
+    	System.out.println("updating Ime " );
+
+    	///return imeDao.findByImeNumber();\
+    	return null;
+    	
+    }
+    
+//    @RequestMapping(value="/exceedance/ime/{imepk}", produces={"application/json"}, method= RequestMethod.POST)
+//    public @ResponseBody List<Ime> createIme(@RequestBody Ime ime)
+//    {
+//    	System.out.println("creating  " + ime );
+//
+//    	return imeDao.findIme(site, fromDate, toDate);
+//    }
     
     @RequestMapping(value="/exceedance/ise", produces={"application/json"}, method= RequestMethod.GET)
     public @ResponseBody List<Ise> getIseData(
@@ -85,7 +116,7 @@ public class ReportController {
     {
     	System.out.println("site " + site );
     	
-    	if(site != null && site.equalsIgnoreCase("undefined"))
+    	if(site != null && (site.equalsIgnoreCase("undefined") || site.equalsIgnoreCase("all")))
     		site = null;
     	
     	return iseDao.findIse(site, fromDate, toDate);

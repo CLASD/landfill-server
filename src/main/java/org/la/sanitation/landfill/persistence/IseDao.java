@@ -26,7 +26,7 @@ public class IseDao {
 	public List<Ise> findIse(String site, Date fromDate, Date toDate)
 	{
 		
-		String sql = "select i.*, sp.PointType, s.Name from ISE i "
+		String sql = "select distinct i.*, sp.PointType, s.Name from ISE i "
 				+ "left join ISEPairing ip on i.ISEPK =  ip.ISEPK "
 				+ "left join SamplingPoint sp on ip.SamplingPointPK =  sp.SamplingPointsPK "
 				+ "left join Site s on sp.SitePK = s.SitePK "; 

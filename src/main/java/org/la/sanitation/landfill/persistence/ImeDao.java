@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.ResultTransformer;
@@ -105,6 +106,13 @@ public class ImeDao<T> {
 		System.out.println("result " + result.size());
 		
 		return result;
+	}
+
+	@Transactional
+	public Ime findByImeNumber(String imeNumber) {
+		
+		Query q = sessionFactory.getCurrentSession().createQuery("from IME where ImeNumber = :imeNumber ");
+		return (Ime) q.uniqueResult();
 	}
 	
 		
