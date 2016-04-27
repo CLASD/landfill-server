@@ -31,12 +31,17 @@ angular.module('reportController', ['ngCookies', 'ngMaterial', 'ngMessages'])
 		    	repairs: [{}]},
         ];
 		
+		$scope.hoverDisplay = true;
+		$scope.hoverEdit = false;
+		
 		$scope.hoverIn = function() {
-			this.hoverOptions = true;
+			this.hoverDisplay = false;
+			this.hoverEdit = true;
 		}
 		
 		$scope.hoverOut = function() {
-			this.hoverOptions = false;
+			this.hoverDisplay = true;
+			this.hoverEdit = false;
 		}
 		
 //		$scope.repairs = [
