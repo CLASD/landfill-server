@@ -70,11 +70,25 @@
 				<td>{{inspection.employee.firstname}} {{inspection.employee.lastname}}</td>
 				<td>{{inspection.value}}</td>
 				
-				<td ng-show="clickDisplay">{{inspection.repair.soil}}</td>
+				<!-- <td ng-show="clickDisplay">{{inspection.repair.soil}}</td> -->
 				<td ng-show="clickEdit">
 					<div class="checkbox">
   						<label>
     					<input type="checkbox" value="{{inspection.repair.soil}}">
+  						</label>
+					</div>
+				</td>
+				<td ng-show="clickDisplay">
+					<div class="checkbox">
+  						<label>
+    					<input type="checkbox" value="{{inspection.repair.soil}}">
+  						</label>
+					</div>
+				</td>
+				<td ng-show="clickEdit">
+					<div class="checkbox">
+  						<label>
+    					<input type="checkbox" value="{{inspection.repair.water}}">
   						</label>
 					</div>
 				</td>
