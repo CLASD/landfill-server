@@ -1,5 +1,7 @@
 package org.la.sanitation.landfill.entity;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -77,6 +79,18 @@ public class ImeRepair {
 	public void setEnteringEmployee(Employee enteringEmployee) {
 		this.enteringEmployee = enteringEmployee;
 	}
-
-
+	
+	public String[] ConvertRepairDateTimeToString(){
+		Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String strRepairDateTime = formatter.format(this.getDateTime());
+		return strRepairDateTime.split(" ");
+	}
+	
+	public String getRepairDateDate(){
+		return this.ConvertRepairDateTimeToString()[0];
+	}
+	
+	public String getRepairDateTime(){
+		return this.ConvertRepairDateTimeToString()[1];
+	}
 }

@@ -122,10 +122,17 @@ public class ImeDao<T> {
 			{
 				in.setRepair(in.getImeRepairs().get(0));
 			}
-		}
-		
+		}	
 		
 		return ime;
 	}
-
+	
+	@Transactional
+	public Ime updateByImePK(Ime ime ) {
+		
+		System.out.println("calling updateByImePK.");
+		sessionFactory.getCurrentSession().saveOrUpdate(ime);
+		
+		return ime;
+	}
 }

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -93,11 +94,11 @@ public class ReportController {
     @RequestMapping(value="/exceedance/ime/{imepk}", consumes ={"application/json"}, produces={"application/json"}, method= RequestMethod.PUT)
     public @ResponseBody List<Ime> updateIme(@RequestBody Ime ime)
     {
-    	System.out.println("updating Ime " );
-
-    	///return imeDao.findByImeNumber();\
-    	return null;
+    	System.out.println("*****updating Ime.");
+    	List<Ime> imes = new ArrayList<Ime>();
+    	imes.add(imeDao.updateByImePK(ime));
     	
+    	return imes;
     }
     
 //    @RequestMapping(value="/exceedance/ime/{imepk}", produces={"application/json"}, method= RequestMethod.POST)
