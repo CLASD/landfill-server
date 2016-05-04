@@ -33,83 +33,99 @@
 		<tbody>
 			<tr ng-repeat="inspection in ime.imeInspections">
 				<td>
-					<table class="table table-bordered table-striped text-center" width="100%" height="100%">
-					<thead  ng-if="$first">
-						<tr>
-							<th class="text-center" rowspan="2">DATE</th>
-							<th class="text-center" rowspan="2">TIME</th>
-							<th class="text-center" rowspan="2">DESCRIPTION</th>
-							<th class="text-center" rowspan="2">Spot, Line, Area</th>
-							<th class="text-center" rowspan="2">INSPECTOR</th>
-							<th class="text-center" rowspan="2">VALUE (ppm/v)</th>
-							<th class="text-center" rowspan="2">ACTION</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>{{inspection.inspectionDateDate}}</td>
-							<td>{{inspection.inspectionDateTime}}</td>
-							<td>{{inspection.description}}</td>
-							<td>{{inspection.imeShape}}</td>
-							<td>{{inspection.employee.firstname}}
-								{{inspection.employee.lastname}}</td>
-							<td>{{inspection.value}}</td>
-							<td><a href="" ng-click="addRepair()"><span class="glyphicon glyphicon-pencil"></span></a></td>
-						</tr>
-					</tbody>
+					<table class="table table-bordered table-striped text-center"
+						width="100%" height="100%">
+						<thead ng-if="$first">
+							<tr>
+								<th class="text-center" rowspan="2">DATE</th>
+								<th class="text-center" rowspan="2">TIME</th>
+								<th class="text-center" rowspan="2">DESCRIPTION</th>
+								<th class="text-center" rowspan="2">Spot, Line, Area</th>
+								<th class="text-center" rowspan="2">INSPECTOR</th>
+								<th class="text-center" rowspan="2">VALUE (ppm/v)</th>
+								<th class="text-center" rowspan="2">ACTION</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>{{inspection.inspectionDateDate}}</td>
+								<td>{{inspection.inspectionDateTime}}</td>
+								<td>{{inspection.description}}</td>
+								<td>{{inspection.imeShape}}</td>
+								<td>{{inspection.employee.firstname}}
+									{{inspection.employee.lastname}}</td>
+								<td>{{inspection.value}}</td>
+								<td><a href="" ng-click="addRepair()"><span
+										class="glyphicon glyphicon-pencil"></span></a></td>
+							</tr>
+						</tbody>
 					</table>
 				</td>
 				<td>
-					<table class="table table-bordered table-striped text-center" width="100%" height="100%">
-					<thead ng-if="$first">
-						<tr>
-							<th class="text-center" colspan="4">DESCRIPTION OF REPAIR</th>
-							<th class="text-center" colspan="2">COMPLETION</th>
-							<th class="text-center" rowspan="2">ACTION</th>
-						</tr>
-						<tr ng-if="$first">
-							<th class="text-center">SOIL</th>
-							<th class="text-center">WATER</th>
-							<th class="text-center">OTHER</th>
-							<th class="text-center">CREW</th>
-							<th class="text-center">DATE</th>
-							<th class="text-center">TIME</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="imeRepair in inspection.imeRepairs">
-							<td ng-show="clickEdit">
-								<div class="checkbox">
-									<label> <input type="checkbox" ng-model="imeRepair.type" ng-true-value="'SOIL'" ng-false-value="'WATER'"></label>
-								</div>
-							</td>
-							<td ng-show="clickDisplay">
-								<div class="checkbox">
-									<label> <input type="checkbox" ng-model="imeRepair.type" ng-true-value="'SOIL'" ng-false-value="'WATER'"></label>
-								</div>
-							</td>
-							<td ng-show="clickEdit">
-								<div class="checkbox">
-									<label> <input type="checkbox" ng-model="imeRepair.type" ng-true-value="'WATER'" ng-false-value="'SOIL'"></label>
-								</div>
-							</td>
-							<td ng-show="clickDisplay">
-								<div class="checkbox">
-									<label> <input type="checkbox" ng-model="imeRepair.type" ng-true-value="'WATER'" ng-false-value="'SOIL'"></label>
-								</div>
-							</td>
-							<td ng-show="clickEdit"><label><input type="text" class="form-control" value="{{imeRepair.water}}"></label></td>
-							<td ng-show="clickDisplay">{{imeRepair.description}}</td>
-							<td ng-show="clickEdit"><label><input type="text" class="form-control" value="{{imeRepair.crew}}"></label></td>
-							<td ng-show="clickDisplay">{{imeRepair.crew}}</td>
-							<td ng-show="clickEdit"><label><input type="text" class="form-control" value="{{imeRepair.repairDateDate}}"></label></td>
-							<td ng-show="clickDisplay">{{imeRepair.repairDateDate}}</td>
-							<td ng-show="clickEdit"><input type="text" class="form-control" value="{{imeRepair.datetime}}"></td>
-							<td ng-show="clickDisplay">{{imeRepair.repairDateTime}}</td>
-							<td><a href="" ng-click="addRepair()"><span class="glyphicon glyphicon-pencil"></span></a></td>
-						</tr>
-					</tbody>
-					</table>				
+					<table class="table table-bordered table-striped text-center"
+						width="100%" height="100%">
+						<thead ng-if="$first">
+							<tr>
+								<th class="text-center" colspan="4">DESCRIPTION OF REPAIR</th>
+								<th class="text-center" colspan="2">COMPLETION</th>
+								<th class="text-center" rowspan="2">ACTION</th>
+							</tr>
+							<tr ng-if="$first">
+								<th class="text-center">SOIL</th>
+								<th class="text-center">WATER</th>
+								<th class="text-center">OTHER</th>
+								<th class="text-center">CREW</th>
+								<th class="text-center">DATE</th>
+								<th class="text-center">TIME</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="imeRepair in inspection.imeRepairs">
+								<td ng-show="clickEdit">
+									<div class="checkbox">
+										<label> <input type="checkbox"
+											ng-model="imeRepair.type" ng-true-value="'SOIL'"
+											ng-false-value="'WATER'"></label>
+									</div>
+								</td>
+								<td ng-show="clickDisplay">
+									<div class="checkbox">
+										<label> <input type="checkbox"
+											ng-model="imeRepair.type" ng-true-value="'SOIL'"
+											ng-false-value="'WATER'"></label>
+									</div>
+								</td>
+								<td ng-show="clickEdit">
+									<div class="checkbox">
+										<label> <input type="checkbox"
+											ng-model="imeRepair.type" ng-true-value="'WATER'"
+											ng-false-value="'SOIL'"></label>
+									</div>
+								</td>
+								<td ng-show="clickDisplay">
+									<div class="checkbox">
+										<label> <input type="checkbox"
+											ng-model="imeRepair.type" ng-true-value="'WATER'"
+											ng-false-value="'SOIL'"></label>
+									</div>
+								</td>
+								<td ng-show="clickDisplay">{{imeRepair.description}}</td>
+								<td ng-show="clickEdit"><label><input type="text"
+										class="form-control" ng-model="imeRepair.description" value="{{imeRepair.description}}"></label></td>
+								<td ng-show="clickEdit"><label><input type="text"
+										class="form-control" ng-model="imeRepair.crew" value="{{imeRepair.crew}}"></label></td>
+								<td ng-show="clickDisplay">{{imeRepair.crew}}</td>
+								<td ng-show="clickEdit"><label><input type="text"
+										class="form-control" value="{{imeRepair.repairDateDate}}"></label></td>
+								<td ng-show="clickDisplay">{{imeRepair.repairDateDate}}</td>
+								<td ng-show="clickEdit"><input type="text"
+									class="form-control" value="{{imeRepair.datetime}}"></td>
+								<td ng-show="clickDisplay">{{imeRepair.repairDateTime}}</td>
+								<td><a href="" ng-click="addRepair()"><span
+										class="glyphicon glyphicon-pencil"></span></a></td>
+							</tr>
+						</tbody>
+					</table>
 				</td>
 			</tr>
 			<!-- <tr>
@@ -135,19 +151,16 @@
 
 
 			<!--  <tr ng-repeat="repair in inspection.repairs">-->
-			
+
 		</tbody>
 	</table>
 
 	<p>Run Date, Time: {{currentTime}}</p>
 
 	<p class="pull-right">
-		<a href="" ng-click="showReport()"><span
-			class="glyphicon glyphicon-pencil"></span> Edit Report</a></br> <a href=""
-			ng-click="hideReport()"><span
-			class="glyphicon glyphicon-floppy-disk"></span> Save Report</a></br> <a
-			href="" ng-click="showAddRepair()"><span
-			class="glyphicon glyphicon-plus-sign"></span> Add Repair</a></br>
+		<a href="" ng-click="showReport()"><span class="glyphicon glyphicon-pencil"></span> Edit Report</a></br> 
+		<a href="" ng-click="putIme()"><span class="glyphicon glyphicon-floppy-disk"></span> Save Report</a></br> 
+		<a href="" ng-click="showAddRepair()"><span class="glyphicon glyphicon-plus-sign"></span> Add Repair</a></br>
 	</p>
 
 	<div ng-show="showRepair" align="center">

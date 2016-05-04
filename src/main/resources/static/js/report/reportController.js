@@ -69,57 +69,6 @@ angular
 							$scope.types = [ 'Probes', 'Instantaneous',
 									'Integrated', 'Leak Check', 'All' ];
 
-							// IME Data
-							$scope.inspections = [
-									{
-										date : '1/2/2012',
-										time : '0715',
-										description : 'Crack across bench and down slope.',
-										type : 'Line',
-										inspector : 'William Andrews',
-										value : '50,000',
-										repairs : [
-												{
-													soil : 'X',
-													water : 'X',
-													other : 'Ripped, watered, walked with D8 dozer.',
-													crew : 'Gas Crew',
-													date : '1/8/2012',
-													time : '1100'
-												},
-												{
-													soil : 'X',
-													water : 'X',
-													other : 'Extended repaired area.',
-													crew : 'Ed & Doug',
-													date : '1/9/2012',
-													time : '1500'
-												} ]
-									},
-									{
-										date : '1/10/2012',
-										time : '0730',
-										description : 'Now only around base of well 6ABHW02.',
-										type : 'Spot',
-										inspector : 'Brijesh Misra',
-										value : '750',
-										repairs : [ {
-											soil : '',
-											water : 'X',
-											other : 'Hand tamped around well.',
-											crew : 'John & Bob',
-											date : '1/11/2012',
-											time : '1400'
-										} ]
-									}, {
-										date : '1/13/2012',
-										time : '0900',
-										description : 'PASSED',
-										type : '',
-										inspector : 'John Salas',
-										value : '12.5',
-										repairs : [ {} ]
-									}, ];
 
 							$scope.clickDisplay = true;
 							$scope.clickEdit = false;
@@ -242,6 +191,32 @@ angular
 									$scope.ime = data;
 								});
 							};
+							
+							
+							$scope.putIme = function() {
+								
+								
+								var ime = $scope.ime;
+								
+								var req = {
+										 method: 'PUT',
+										 url: 'http://localhost:9091/data/exceedance/ime/' + ime.id,
+										 headers: {
+										   'Content-Type': 'application/json'
+										 },
+										 data: ime
+										}
+
+										$http(req).success(function(data) {
+											$scope.ime = data;
+										});
+								
+								$scope.clickDisplay = true;
+								
+							};
+							
+							
+							
 
 							$scope.sendEmail = function(messageType) {
 
