@@ -1,18 +1,27 @@
-<h3 align="center">Hot-Spot Monthly Tracking Sheet</h3>
-<a href=""><span class="pull-right glyphicon glyphicon-download-alt"></span></a>
-<a href=""><span class="pull-right glyphicon glyphicon-share"></span></a>
-<a href=""><span class="pull-right glyphicon glyphicon-search"></span></a>
 <h3 align="center">
-	MONTH OF <select name="month">
+	MONTH OF 
+	<select name="month">
 		<option ng-repeat="month in months" value="{{month}}">{{month}}</option>
 	</select> <select name="year">
 		<option ng-repeat="year in years" value="{{year}}">{{year}}</option>
-	</select> for the <select name="site">
+	</select> 
+	for the 
+	<select name="site">
 		<option ng-repeat="site in sites" value="{{site}}">{{site}}</option>
-	</select> Landfill
+	</select> 
+	Landfill
+	</br></br>
 	<button type="button" class="btn btn-success" ng-click="">Generate</button>
 </h3>
+</br></br>
+
 <div ng-show="">
+	<h3 align="center">Hot-Spot Monthly Tracking Sheet</h3>
+	
+	<a href=""><span class="pull-right glyphicon glyphicon-download-alt"></span></a>
+	<a href=""><span class="pull-right glyphicon glyphicon-share"></span></a>
+	<a href=""><span class="pull-right glyphicon glyphicon-search"></span></a>
+	
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
