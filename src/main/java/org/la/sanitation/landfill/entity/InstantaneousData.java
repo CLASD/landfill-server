@@ -25,7 +25,7 @@ public class InstantaneousData implements Serializable{
 	private static final long serialVersionUID = -8398045443579334587L;
 	@Id
     @Column(name="instantaneousDataPK")
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer instantaneousDataPK;
 	private Integer sitePK;
 	private Integer employeePK;

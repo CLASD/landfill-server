@@ -1,6 +1,7 @@
 package org.la.sanitation.landfill.service;
 
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,11 @@ import org.la.sanitation.landfill.persistence.InstantaneousDao;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @Service
 public class InstantaneousService {
 	
@@ -18,23 +24,17 @@ public class InstantaneousService {
 	private InstantaneousDao instantaneousDao;
 	
 	@Transactional
-	public void process(byte[] bytes) {
-		String file = new String(bytes);
-		System.out.println(file);
+	public void process(byte[] bytes) throws JsonParseException, JsonMappingException, IOException {
+		String json = new String(bytes);
+		System.out.println(json);
 		
-		//TODO parse json file
+		ObjectMapper mapper = new ObjectMapper();
+        List<InstantaneousData> dataList = mapper.readValue(json, new TypeReference<List<InstantaneousData>>(){});
 		
-		InstantaneousData data = new InstantaneousData();
-		
-		data.setStartTime(new Date());
-		data.setFinishTime(new Date());
-		data.setEmployeePK(1);
-		data.setSitePK(1);
-		data.setInstrumentPK(1);
-		data.setSamplingPointPK(1);
-		data.setMaxCH4("89.98");
-		
-		instantaneousDao.save(data);
+		for(InstantaneousData data : dataList)
+		{
+			instantaneousDao.save(data);
+		}
 		
 	}
 
