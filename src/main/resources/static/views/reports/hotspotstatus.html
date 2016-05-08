@@ -1,8 +1,9 @@
 <h3 align="center">
-	MONTH OF 
+	Month of 
 	<select name="month">
 		<option ng-repeat="month in months" value="{{month}}">{{month}}</option>
-	</select> <select name="year">
+	</select> 
+	<select name="year">
 		<option ng-repeat="year in years" value="{{year}}">{{year}}</option>
 	</select> 
 	for the 
@@ -15,29 +16,21 @@
 </h3>
 </br></br>
 
-<div ng-show="">
+<div>
 	<h3 align="center">Hot-Spot Monthly Tracking Sheet</h3>
 	
 	<a href=""><span class="pull-right glyphicon glyphicon-download-alt"></span></a>
 	<a href=""><span class="pull-right glyphicon glyphicon-share"></span></a>
 	<a href=""><span class="pull-right glyphicon glyphicon-search"></span></a>
+	</br></br>
 	
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
 				<th>IME #</th>
-				<th>GRID(s)</th>
-				<th>FOUND BY</th>
-				<th>FOUND ON</th>
-				<th>Repaired?</th>
-				<th>Recheck Date</th>
-				<th>Pass / Fail</th>
-				<th>Repaired?</th>
-				<th>Recheck Date</th>
-				<th>Pass / Fail</th>
-				<th>Repaired?</th>
-				<th>Recheck Date</th>
-				<th>Pass / Fail</th>
+				<th>Grid(s)</th>
+				<th>Found By</th>
+				<th>Found On</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -46,16 +39,47 @@
 				<td>{{data.grid}}</td>
 				<td>{{data.foundby}}</td>
 				<td>{{data.founddate}}</td>
-				<td>{{data.repaired1}}</td>
-				<td>{{data.recheckdate1}}</td>
-				<td>{{data.passedfail1}}</td>
-				<td>{{data.repaired2}}</td>
-				<td>{{data.recheckdate2}}</td>
-				<td>{{data.passedfail2}}</td>
-				<td>{{data.repaired3}}</td>
-				<td>{{data.recheckdate3}}</td>
-				<td>{{data.passedfail3}}</td>
 			</tr>
 		</tbody>
 	</table>
+	</br></br>
+	
+	<h3 align="center">
+		List Repairs of IME # 
+		<select name="imenum" ng-model="selectedIME">
+			<option ng-repeat="data in hotspotstatusData" value="{{data.imenum}}">{{data.imenum}}</option>
+		</select>
+	</h3>
+	</br></br>
+	
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>Repaired?</th>
+				<th>Recheck Date</th>
+				<th>Pass / Fail</th>
+			</tr>
+		</thead>
+		<tbody>
+			<div ng-repeat="data in hotspotstatusData">
+				<div ng-if="selectedIME == data.imenum">
+					<tr ng-repeat="repair in data.repairs">
+						<td>{{repair.repaired}}</td>
+						<td>{{repair.recheckdate}}</td>
+						<td>{{repair.passedfail}}</td>
+					</tr>
+				</div>
+			</div>
+		</tbody>
+	</table>
+</div>
+
+<!-- This works but the above isn't working... ng-if works -->
+<div ng-repeat="data in hotspotstatusData">
+	<div ng-repeat="repair in data.repairs">
+		<td>{{repair.repaired}}</td>
+		<td>{{repair.recheckdate}}</td>
+		<td>{{repair.passedfail}}</td>
+	</div>
+	</br></br>
 </div>

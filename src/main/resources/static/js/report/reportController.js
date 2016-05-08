@@ -13,46 +13,44 @@ angular
 								grid : '12',
 								foundby : 'WA',
 								founddate : '1/1/16',
-								repaired1 : '1/3/16',
-								recheckdate1 : '1/4/16',
-								passedfail1 : 'PASSED',
-								repaired2 : '',
-								recheckdate2 : '',
-								passfail2 : '',
-								repaired3 : '',
-								recheckdate3 : '',
-								passfail3 : ''
+								repairs: [{
+									repaired : '1/3/16',
+									recheckdate : '1/4/16',
+									passedfail : 'PASSED'
+								}]
 							}, {
 								imenum : 'TC1601-02',
 								grid : '12',
 								foundby : 'WA',
 								founddate : '1/1/16',
-								repaired1 : '1/4/16',
-								recheckdate1 : '1/4/16',
-								passedfail1 : 'FAILED',
-								repaired2 : '1/5/16',
-								recheckdate2 : '1/6/16',
-								passfail2 : 'PASSED',
-								repaired3 : '',
-								recheckdate3 : '',
-								passfail3 : ''
+								repairs: [{
+									repaired : '1/4/16',
+									recheckdate : '1/4/16',
+									passedfail : 'FAILED'
+								}, {
+									repaired : '1/5/16',
+									recheckdate : '1/6/16',
+									passedfail : 'PASSED'
+								}]
 							}, {
 								imenum : 'TC1601-03',
 								grid : '13',
 								foundby : 'JS',
 								founddate : '1/2/16',
-								repaired1 : '1/3/16',
-								recheckdate1 : '1/5/16',
-								passedfail1 : 'PASSED',
-								repaired2 : '1/7/16',
-								recheckdate2 : '1/8/16',
-								passfail2 : 'FAILED',
-								repaired3 : '1/9/16',
-								recheckdate3 : '1/9/16',
-								passfail3 : 'PASSED'
+								repairs: [{
+									repaired : '1/3/16',
+									recheckdate : '1/5/16',
+									passedfail : 'PASSED'
+								}, {
+									repaired : '1/7/16',
+									recheckdate : '1/8/16',
+									passedfail : 'FAILED'
+								}, {
+									repaired : '1/9/16',
+									recheckdate : '1/9/16',
+									passedfail : 'PASSED'
+								}]
 							} ];
-
-							/* Start of Dummy Data */
 
 							// Hotspot Status
 							$scope.months = [ 'January', 'February', 'March',
@@ -68,8 +66,9 @@ angular
 
 							$scope.types = [ 'Probes', 'Instantaneous',
 									'Integrated', 'Leak Check', 'All' ];
-
-
+							
+							$scope.selectedIME = '';
+							
 							$scope.clickDisplay = true;
 							$scope.clickEdit = false;
 							$scope.showRepair = false;

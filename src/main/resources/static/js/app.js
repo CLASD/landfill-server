@@ -7,7 +7,6 @@ angular.module('app', ['ngRoute', 'ngResource',
         .when('/', {
           templateUrl: 'views/home.html',
           controller: 'reportController'
-
         })
         .when('/home', {
           templateUrl: 'views/home.html',
