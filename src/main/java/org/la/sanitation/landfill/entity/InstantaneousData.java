@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="InstantaneousData")
 @DynamicUpdate
@@ -29,7 +31,9 @@ public class InstantaneousData implements Serializable{
 	private Integer instantaneousDataPK;
 	private Integer sitePK;
 	private Integer employeePK;
+	@JsonIgnore
 	private Date startTime;
+	@JsonIgnore
 	private Date finishTime;
 	private Integer InstrumentPK;
 	private String maxCH4;

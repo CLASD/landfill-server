@@ -38,7 +38,7 @@ public class ReportController {
     @Resource
     private InstantaneousService instantaneousService;
     
-    //TODO: use a service class
+    //TODO: use a service class to call the dao
     @Resource
     private ImeDao imeDao;
     
@@ -56,8 +56,6 @@ public class ReportController {
     
     @RequestMapping(value="/email", method= RequestMethod.GET)
     public ResponseEntity sendReportEmail() throws Exception
-//    		@RequestParam(value = "messageType") String messageType, 
-//    		@RequestParam(value = "employeeId") String employeeId) throws Exception
     {
     	System.out.println("in controller Email");
     	Map<String, Object> data = new HashMap<String, Object>();
@@ -100,14 +98,6 @@ public class ReportController {
     	
     	return imes;
     }
-    
-//    @RequestMapping(value="/exceedance/ime/{imepk}", produces={"application/json"}, method= RequestMethod.POST)
-//    public @ResponseBody List<Ime> createIme(@RequestBody Ime ime)
-//    {
-//    	System.out.println("creating  " + ime );
-//
-//    	return imeDao.findIme(site, fromDate, toDate);
-//    }
     
     @RequestMapping(value="/exceedance/ise", produces={"application/json"}, method= RequestMethod.GET)
     public @ResponseBody List<Ise> getIseData(

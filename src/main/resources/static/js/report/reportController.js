@@ -73,6 +73,7 @@ angular
 							$scope.clickDisplay = true;
 							$scope.clickEdit = false;
 							$scope.showRepair = false;
+							$scope.isShowAddInspection = false;
 
 							$scope.showReport = function() {
 								this.clickDisplay = false;
@@ -208,13 +209,21 @@ angular
 										}
 
 										$http(req).success(function(data) {
-											$scope.ime = data;
+//											$scope.ime = data;
 										});
 								
 								$scope.clickDisplay = true;
 								
 							};
 							
+							$scope.showAddInspection = function() {
+								$scope.isShowAddInspection = true;
+								
+							};
+							
+							$scope.hideAddInspection = function() {
+								$scope.isShowAddInspection = false;
+							};
 							
 							
 

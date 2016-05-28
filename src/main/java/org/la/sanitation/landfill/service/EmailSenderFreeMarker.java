@@ -26,22 +26,21 @@ public class EmailSenderFreeMarker implements EmailSender{
 	@Override
 	public void sendEmail(TemplateType template, Map<String, Object> data) throws Exception{
 		
-		//Template temp = freeMarkerConfig.getTemplate(template.getTemplateFilename());
-//        StringWriter sw = new StringWriter();
-//        temp.process( data, sw );
+		Template temp = freeMarkerConfig.getTemplate(template.getTemplateFilename());
+        StringWriter sw = new StringWriter();
+        temp.process( data, sw );
        
-        String testAddress = "ssusanx0507@gmail.com";
-        //String body = sw.toString();
+        String body = sw.toString();
+        String fromAddress = "city@la.org"; // this should be from the properties file
         
-        String body = "Test";
         try {
             MimeMessageHelper message = new MimeMessageHelper( this.mailSender.createMimeMessage(), true );
-            message.setFrom(testAddress);
+            message.setFrom(fromAddress);
             message.setSubject( "Test email - Landfill Data Manager" );
             //message.addAttachment( attachment.getFilename(), new ByteArrayResource(attachment.getBody().getBytes(Charsets.UTF_8)), attachment.getMimeType());
             message.setText( body, true );
             
-            message.setTo(testAddress);
+            message.setTo(fromAddress);
             
         	mailSender.send(message.getMimeMessage());
             

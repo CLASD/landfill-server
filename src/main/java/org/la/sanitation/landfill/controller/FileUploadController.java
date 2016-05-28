@@ -30,7 +30,7 @@ public class FileUploadController {
 	private InstantaneousService instantaneousService;
 	
 	@Resource
-	private ImeService imeService;
+	private ImeService imeService; // TODOs ideally all the spring beans would have interfaces
 
 	@RequestMapping(value="/file", method=RequestMethod.POST)
     public @ResponseBody String handleFileUpload( @RequestParam("file") MultipartFile file){
@@ -48,7 +48,7 @@ public class FileUploadController {
                 if(!extension.equalsIgnoreCase(VALID_EXT))
                 	return "Invalid file extension. Please upload a Json file";
                 
-                if(filename.contains("Instant"))
+                if(filename.contains("Instant") || filename.contains("instant"))
                 {
                 	instantaneousService.process(bytes);
                 }else 
